@@ -36,6 +36,7 @@ import { Button, Toggle, RadioCards, Modal } from '../../components/ui';
 | `Notice` | Data caveats and limitations |
 | `EmptyState` | Nothing to show, or no search results |
 | `Pagination` | Long lists of content |
+| `AnchorNav` | "On this page" navigation for long pages, in a sticky right-hand column, with an optional action |
 
 For charts, use the chart kit in `src/components/charts/` (live at `#charts`), described in [dataviz.md](dataviz.md).
 
@@ -106,7 +107,8 @@ Taken from the Figma feature files. Follow these before inventing a pattern.
 | Carousel | Outlined icon buttons | Welcome |
 | No results | Illustration + one-line message | Data browser list, Comparison tool |
 | Form | Labelled inputs, error text under the field ("Please enter a valid email address"), solid submit. Success: illustration, "Message sent", plain button. | Contact |
-| Long article | Parent/child nav on the left, anchor links on the right (H2s only), attachment items at the end, captions with a thin left rule | Resource article |
+| Navigate a long page | `AnchorNav` ("On this page") in a sticky column on the right; the section in view is highlighted | Segment profile |
+| Long article | Parent/child nav on the left, `AnchorNav` on the right (H2s only), attachment items at the end, captions with a thin left rule | Resource article |
 | Hero band | Light beige band ending in the wave divider | Resources, Blog, Segmentations |
 
 ## Data tools
@@ -125,7 +127,6 @@ Taken from the Figma feature files. Follow these before inventing a pattern.
 | Component | Use |
 |---|---|
 | `segment-profile/SegmentHeader` | Segment name, level chip and size. |
-| `segment-profile/AnchorNav` | In-page section nav on long profiles. |
 | `segment-profile/KeyDataPoints`, `AllDataPoints` | One segment's values against the sample average. |
 | `segment-profile/DetailedDemographics` | Demographic breakdown. |
 | `segment-profile/PrevalenceMap` | Map of where a segment is most prevalent. |

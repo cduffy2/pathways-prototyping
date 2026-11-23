@@ -7,7 +7,7 @@ import {
   AverageKey, BarChart, BoxPlot, ChartCard, DataPointBar, SegmentBreakdownBar, SegmentLegend, SegmentPie, StackedBarChart,
 } from '../../components/charts';
 import type { AreaBreakdown, PopulationFilter, SegmentValue } from '../../components/charts';
-import { Notice, SegmentedControl, Toggle } from '../../components/ui';
+import { AnchorNav, Notice, SegmentedControl, Toggle } from '../../components/ui';
 import '../ComponentsPage/ComponentsPage.css';
 import './ChartsPage.css';
 
@@ -150,11 +150,6 @@ export function ChartsPage({ currentPage, onNavigate }: ChartsPageProps) {
       </header>
 
       <div className="components-page__layout">
-        <nav className="components-page__nav" aria-label="Charts">
-          {sections.map(([id, title]) => (
-            <a key={id} href="#charts" className="components-page__nav-link" onClick={e => { e.preventDefault(); scrollTo(id); }}>{title}</a>
-          ))}
-        </nav>
 
         <main className="components-page__main">
 
@@ -286,6 +281,10 @@ export function ChartsPage({ currentPage, onNavigate }: ChartsPageProps) {
           </Section>
 
         </main>
+
+        <aside className="components-page__aside">
+          <AnchorNav links={sections.map(([id, label]) => ({ id, label }))} />
+        </aside>
       </div>
 
       <Footer />

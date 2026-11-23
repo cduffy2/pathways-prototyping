@@ -26,29 +26,19 @@
 /* Layout */
 .components-page__layout {
   display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  gap: 48px;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 80px;
   padding: 48px 64px 96px;
 }
 
-.components-page__nav {
+/* "On this page" column, as on production profiles */
+.components-page__aside {
   position: sticky;
   top: 24px;
   align-self: start;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
 }
-
-.components-page__nav-link {
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 14px;
-  color: var(--text-secondary);
-  text-decoration: none;
-}
-.components-page__nav-link:hover { background: var(--neutral-plain-hoverbg); color: var(--text-primary); }
-.components-page__nav-link:focus-visible { outline: 2px solid var(--focus-visible); }
 
 .components-page__main { display: flex; flex-direction: column; gap: 64px; }
 
@@ -152,6 +142,11 @@
 .components-page__selection-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .components-page__selection-bar { margin-bottom: 12px; }
 
+/* Anchor nav previews */
+.components-page__anchor-preview { width: 300px; padding: 16px; background: var(--background-page); border-radius: 6px; }
+.components-page__anchor-states li:nth-child(3) .anchor-nav__link { color: var(--text-primary); }
+.components-page__anchor-states li:nth-child(4) .anchor-nav__link { outline: 2px solid var(--focus-visible); outline-offset: 2px; }
+
 /* Forced states for composite components (gallery only) */
 .components-page__force-hover .radio-group__ring { border-color: var(--neutral-500); }
 .components-page__force-focus .radio-group__ring { outline: 2px solid var(--focus-visible); outline-offset: 2px; }
@@ -165,10 +160,14 @@
 .components-page__force-focus-first .segmented__option:first-child { z-index: 2; outline: 2px solid var(--focus-visible); outline-offset: 2px; }
 
 /* Responsive */
+@media (max-width: 1199.98px) {
+  .components-page__layout { grid-template-columns: minmax(0, 1fr) 220px; gap: 48px; }
+}
+
 @media (max-width: 899.98px) {
   .components-page__hero { padding: 48px 24px 32px; }
   .components-page__layout { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 32px 24px 64px; }
-  .components-page__nav { display: none; }
+  .components-page__aside { display: none; }
   .components-page__fields { grid-template-columns: minmax(0, 1fr); }
 }
 

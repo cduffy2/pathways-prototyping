@@ -19,3 +19,4 @@ export { Pagination } from './Pagination/Pagination';
 export { Notice } from './Notice/Notice';
 export { EmptyState } from './EmptyState/EmptyState';
 export { Accordion } from './Accordion/Accordion';
+export { AnchorNav } from './AnchorNav/AnchorNav';

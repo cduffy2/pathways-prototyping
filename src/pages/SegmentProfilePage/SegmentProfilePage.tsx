@@ -4,7 +4,9 @@ import { LeftSidebar, type Page } from '../../components/layout/LeftSidebar/Left
 import { Footer } from '../../components/layout/Footer/Footer';
 import { SegmentHeader } from '../../components/segment-profile/SegmentHeader/SegmentHeader';
 
-import { AnchorNav } from '../../components/segment-profile/AnchorNav/AnchorNav';
+import { AnchorNav } from '../../components/ui/AnchorNav/AnchorNav';
+import { Button } from '../../components/ui/Button/Button';
+import DownloadIcon from '../../assets/icons/Download.svg?react';
 import { KeyDataPoints } from '../../components/segment-profile/KeyDataPoints/KeyDataPoints';
 import { PrevalenceMap } from '../../components/segment-profile/PrevalenceMap/PrevalenceMap';
 import { WalkInHerShoes } from '../../components/segment-profile/WalkInHerShoes/WalkInHerShoes';
@@ -233,7 +235,7 @@ export function SegmentProfilePage({ currentPage, onNavigate }: SegmentProfilePa
 
             {/* Anchor Navigation */}
             <div className="segment-profile-page__anchor-nav">
-              <AnchorNav links={anchorLinks} onExport={() => setExportStep(1)} />
+              <AnchorNav links={anchorLinks} action={<Button variant="soft" endIcon={<DownloadIcon />} onClick={() => setExportStep(1)}>Download segment profile</Button>} />
             </div>
           </div>
 

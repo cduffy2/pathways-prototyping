@@ -4,7 +4,7 @@ import { PrimaryNavBar } from '../../components/layout/PrimaryNavBar/PrimaryNavB
 import { Footer } from '../../components/layout/Footer/Footer';
 import type { Page } from '../../components/layout/LeftSidebar/LeftSidebar';
 import {
-  Accordion, Button, Checkbox, CheckboxItem, Chip, EmptyState, IconButton, Modal, Notice,
+  Accordion, AnchorNav, Button, Checkbox, CheckboxItem, Chip, EmptyState, IconButton, Modal, Notice,
   Pagination, RadioCards, RadioGroup, SegmentedControl, Select, Tabs, TextField, Toggle, Tooltip,
 } from '../../components/ui';
 import DownloadIcon from '../../assets/icons/Download.svg?react';
@@ -43,6 +43,7 @@ const SECTIONS = [
   { id: 'notices', title: 'Notices' },
   { id: 'empty-states', title: 'Empty states' },
   { id: 'pagination', title: 'Pagination' },
+  { id: 'anchor-nav', title: 'On this page' },
   { id: 'filters', title: 'Pattern: filters menu' },
   { id: 'selection', title: 'Pattern: act on a selection' },
 ];
@@ -174,9 +175,6 @@ export function ComponentsPage({ currentPage, onNavigate }: ComponentsPageProps)
       </header>
 
       <div className="components-page__layout">
-        <nav className="components-page__nav" aria-label="Components">
-          {SECTIONS.map(s => <a key={s.id} href={`#components`} onClick={e => { e.preventDefault(); document.getElementById(s.id)?.scrollIntoView({ behavior: 'smooth' }); }} className="components-page__nav-link">{s.title}</a>)}
-        </nav>
 
         <main className="components-page__main">
 
@@ -625,6 +623,37 @@ export function ComponentsPage({ currentPage, onNavigate }: ComponentsPageProps)
             </States>
           </Section>
 
+          {/* Anchor nav */}
+          <Section
+            id="anchor-nav"
+            title="On this page"
+            importName="AnchorNav"
+            use={<>In-page navigation for long pages such as segment profiles, in a sticky column on the right. The section in view is highlighted as you scroll. Add an <code>action</code> for the page's main download. This page's own right-hand column uses it.</>}
+          >
+            <States>
+              <div className="components-page__state-row">
+                <State label="Active, default, hover and focus links">
+                  <div className="components-page__anchor-preview">
+                    <AnchorNav
+                      activeId="demo-b"
+                      links={[{ id: 'demo-a', label: 'Introduction' }, { id: 'demo-b', label: 'Key data points' }, { id: 'demo-c', label: 'Segment prevalence' }, { id: 'demo-d', label: 'All data points' }]}
+                      className="components-page__anchor-states"
+                    />
+                  </div>
+                </State>
+                <State label="With an action">
+                  <div className="components-page__anchor-preview">
+                    <AnchorNav
+                      activeId="demo-e"
+                      links={[{ id: 'demo-e', label: 'Introduction' }, { id: 'demo-f', label: 'Walk in her shoes' }, { id: 'demo-g', label: 'All data points' }]}
+                      action={<Button variant="soft" endIcon={<DownloadIcon />}>Download segment profile</Button>}
+                    />
+                  </div>
+                </State>
+              </div>
+            </States>
+          </Section>
+
           {/* Pattern: filters menu */}
           <Section
             id="filters"
@@ -686,6 +715,10 @@ export function ComponentsPage({ currentPage, onNavigate }: ComponentsPageProps)
           </Section>
 
         </main>
+
+        <aside className="components-page__aside">
+          <AnchorNav links={SECTIONS.map(sec => ({ id: sec.id, label: sec.title }))} />
+        </aside>
       </div>
 
       <Footer />

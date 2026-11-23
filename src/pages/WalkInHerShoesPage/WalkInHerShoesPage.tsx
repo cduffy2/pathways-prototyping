@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { PrimaryNavBar } from '../../components/layout/PrimaryNavBar/PrimaryNavBar';
 import { LeftSidebar, type Page } from '../../components/layout/LeftSidebar/LeftSidebar';
 import { Footer } from '../../components/layout/Footer/Footer';
-import { AnchorNav } from '../../components/segment-profile/AnchorNav/AnchorNav';
+import { AnchorNav } from '../../components/ui/AnchorNav/AnchorNav';
 import Rural4Portrait from '../../assets/Rural-4 most vulnerable_portrait.png';
 import FootstepsImg from '../../assets/Footsteps-3.png';
 import Badge3 from '../../assets/icons/3.png';
