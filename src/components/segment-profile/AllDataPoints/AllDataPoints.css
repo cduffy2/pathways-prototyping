@@ -181,17 +181,17 @@
 }
 
 .all-data-points__toggle:hover {
-  border-color: #b0bac3;
+  border-color: var(--neutral-500);
 }
 
 .all-data-points__toggle--active {
-  background-color: #383633;
-  border-color: #383633;
+  background-color: var(--neutral-700);
+  border-color: var(--neutral-700);
 }
 
 .all-data-points__toggle--active:hover {
-  background-color: #1F1E1C;
-  border-color: #1F1E1C;
+  background-color: var(--neutral-800);
+  border-color: var(--neutral-800);
 }
 
 .all-data-points__toggle-thumb {

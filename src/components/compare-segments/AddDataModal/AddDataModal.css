@@ -420,8 +420,8 @@
 }
 
 .add-data-modal__checkbox--checked {
-  background-color: #383633;
-  border-color: #383633;
+  background-color: var(--neutral-700);
+  border-color: var(--neutral-700);
 }
 
 .add-data-modal__checkbox-icon {

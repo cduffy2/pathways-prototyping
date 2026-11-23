@@ -28,13 +28,15 @@ Components are plain React + CSS, one folder each, with BEM class names.
 
 ### Checkboxes, radio buttons and toggles
 
-**Outlined when off, solid when on.** This applies to all three controls.
+| Control | Off | On | Reference |
+|---|---|---|---|
+| Checkbox | Outlined: white fill, `--neutral-400` border | Solid `--neutral-700` fill, white tick | `common/Checkbox` |
+| Toggle | Outlined track, grey thumb | Solid `--neutral-700` track, white thumb | `.page-header__toggle` |
+| Radio | Outlined ring | Ring stays outlined, with a `--text-primary` dot. Radios are never solid. | `.export-modal__radio` |
 
-- **Off:** white fill with a `--neutral-400` border.
-- **On:** solid `--primary-600` fill and border, with a white tick, dot or thumb.
-- **Hover:** darken one step (`--neutral-500` border when off, `--primary-700` fill when on).
-
-`common/Checkbox` is the reference. Match it for radio buttons and toggles, and don't use the browser's default controls.
+- "On" is always dark neutral, never blue.
+- Hover goes one step darker (`--neutral-500` border off, `--neutral-800` fill on).
+- Don't use the browser's default controls.
 
 ### Buttons
 
@@ -42,10 +44,38 @@ Not a shared component yet. Copy the class pattern and match Storybook [Button](
 
 | Style | When | Look | Example class |
 |---|---|---|---|
-| Primary dark | The one main action in a view | `--neutral-700` fill, white text, 6px radius | `.data-browser-page__dark-btn` |
-| Outlined | Secondary actions, filters, menus | White fill, `--neutral-200` border | `.page-header__actions-trigger` |
-| Soft | Low-emphasis actions in cards | `--neutral-200` fill, arrow icon | `.resources-page__explainer-btn` |
-| Link | Navigating to more content | `--text-link`, 600 weight, arrow icon | `.news-page__read-more` |
+| Solid (primary dark) | The one main action in a view: Compare, Submit, Join the Pathways Community | `--neutral-700` fill, white text, 6px radius | `.data-browser-page__dark-btn` |
+| Outlined | Secondary actions and anything that opens a menu: Filters, Actions | White fill, `--neutral-200` border | `.page-header__actions-trigger` |
+| Soft | Card calls to action ("Explore") and page-header actions (Download, Share this view) | `--neutral-200` fill, arrow icon | `.resources-page__explainer-btn` |
+| Plain / link | Low-emphasis text actions (Clear selection, Back) and links to more content | `--text-link`, 600 weight, arrow icon | `.news-page__read-more` |
+
+## Which component where
+
+Taken from the Figma feature files. Follow these before inventing a pattern.
+
+| Need | Use | Example in Figma |
+|---|---|---|
+| Filter a whole view by health area (single choice) | Row of **radio cards**: icon + label, selected one gets a soft fill and dark border. First option is "All data". | Segment profile, Segmentation overview |
+| Switch between views of the same data | **Outlined button group**, selected segment filled | "All segments / Rural 4 / Urban 4", "By vulnerability / By urban/rural / By size" |
+| Turn an optional layer on or off | **Toggle** with a label on its left | "Standard error", "Statistical differences" |
+| Pick several items from a long list | **Checkbox list items**, grouped in **plain accordions** by category, with a soft search input above | Data browser, Comparison tool |
+| One choice from a few options in a modal | **Radio list**: radio, bold label, optional muted hint ("· best for…") | Export format |
+| One choice where options need detail | **Radio cards** in a list, selected card gets a dark border; add a soft success chip for "Recommended" | Data source |
+| Filter a list of content | Outlined "Filters" button → menu of checkboxes with "Clear" (outlined) and "Apply" (solid). Show applied filters as **soft chips** under the heading. On phones the menu is a full-screen sheet with stacked full-width buttons. | Blog |
+| Act on a selection | Plain "Clear selection" + solid primary with a count: "Compare across segments (3) →" | All data points |
+| Show what's selected | Panel titled "Selected data" with a "Clear all" link, an empty state ("No data selected") and a solid "Compare →" at the bottom | Comparison tool |
+| Choose from a set list in a filter bar | **Outlined select** (TextField) | Prevalence map geography |
+| Search | **Soft input** with a search icon | Data browser list, Comparison tool |
+| Explain a term or number | Info icon with a **solid tooltip** | Data browser |
+| Tag or status on a card or table row | **Soft chip** | Segmentation overview tables |
+| Download or share from a tool | Plain or soft button with icon in the filter bar or page header | Prevalence map, Data browser |
+| Close a modal or sheet | Plain icon button (✕) top right | All modals |
+| Page through results | Plain icon-button arrows + number nav items, "…" for long ranges | Blog |
+| Carousel | Outlined icon buttons | Welcome |
+| No results | Illustration + one-line message | Data browser list, Comparison tool |
+| Form | Labelled inputs, error text under the field ("Please enter a valid email address"), solid submit. Success: illustration, "Message sent", plain button. | Contact |
+| Long article | Parent/child nav on the left, anchor links on the right (H2s only), attachment items at the end, captions with a thin left rule | Resource article |
+| Hero band | Light beige band ending in the wave divider | Resources, Blog, Segmentations |
 
 ## Data tools
 
