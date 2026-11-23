@@ -1,5 +1,6 @@
 import { SERIES_COLOUR, formatPercent } from '../chartUtils';
 import './DataPointBar.css';
+import '../charts.css';
 
 interface DataPointBarProps {
   /** Data point name, exactly as on live. */

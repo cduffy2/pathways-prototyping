@@ -5,6 +5,7 @@ import { AXIS_TICK, CATEGORICAL, formatPercent, sortBySegment } from '../chartUt
 import { BarChart } from '../BarChart/BarChart';
 import { Button } from '../../ui/Button/Button';
 import './StackedBarChart.css';
+import '../charts.css';
 
 export interface StackCategory {
   key: string;
@@ -32,7 +33,7 @@ const AVERAGE = 'Average';
 interface NAShapeProps { x?: number; y?: number; width?: number; height?: number }
 function NAShape({ x = 0, y = 0, width = 0, height = 0 }: NAShapeProps) {
   if (height <= 0) return null;
-  return <rect x={x + 0.5} y={y + 0.5} width={width - 1} height={height - 1} fill="var(--neutral-200)" stroke="var(--neutral-500)" strokeDasharray="4 3" />;
+  return <rect className="chart-mark" x={x + 0.5} y={y + 0.5} width={width - 1} height={height - 1} fill="var(--neutral-200)" stroke="var(--neutral-500)" strokeDasharray="4 3" />;
 }
 
 interface TooltipProps { active?: boolean; label?: string; payload?: { name?: string; value?: number; dataKey?: string; color?: string }[] }
@@ -108,7 +109,7 @@ export function StackedBarChart({ categories, data, average, height = 360 }: Sta
         <>
           <p className="stacked-bar__hint"><InfoIcon aria-hidden="true" />Click a category in the legend above to isolate it</p>
           <ResponsiveContainer width="100%" height={height}>
-            <RBarChart data={rows} margin={{ top: 8, right: 8, bottom: 0, left: 8 }} barCategoryGap="18%">
+            <RBarChart className="pathways-chart" data={rows} margin={{ top: 8, right: 8, bottom: 0, left: 8 }} barCategoryGap="18%">
               <XAxis dataKey="segment" tickLine={false} axisLine={false} interval={0} tick={AXIS_TICK} tickFormatter={(v: string) => (v === GAP ? '' : v)} />
               <YAxis hide domain={[0, 100]} />
               <Tooltip content={<StackTooltip />} cursor={{ fill: 'var(--neutral-100)' }} />

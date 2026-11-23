@@ -1,6 +1,7 @@
 import { Bar, CartesianGrid, ComposedChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { AXIS_TICK, sortBySegment } from '../chartUtils';
 import '../StackedBarChart/StackedBarChart.css';
+import '../charts.css';
 
 export interface BoxStats {
   min: number;
@@ -38,7 +39,7 @@ interface ShapeProps { x?: number; y?: number; width?: number; height?: number; 
 function BoxShape({ x = 0, y = 0, width = 0, height = 0, payload }: ShapeProps) {
   if (!payload) return null;
   if (!payload.stats) {
-    return <rect x={x + width * 0.15} y={y} width={width * 0.7} height={height} fill="var(--neutral-200)" stroke="var(--neutral-500)" strokeDasharray="4 3" />;
+    return <g className="chart-mark--box"><rect x={x + width * 0.15} y={y} width={width * 0.7} height={height} fill="var(--neutral-200)" stroke="var(--neutral-500)" strokeDasharray="4 3" /></g>;
   }
   const { min, q1, median, q3, max, mean } = payload.stats;
   const span = max - min || 1;
@@ -50,7 +51,7 @@ function BoxShape({ x = 0, y = 0, width = 0, height = 0, payload }: ShapeProps) 
   const fill = payload.isSample ? 'var(--vulnerability-more-050)' : 'var(--primary-050)';
   const cap = bw * 0.3;
   return (
-    <g stroke={stroke} strokeWidth={1}>
+    <g className="chart-mark--box" stroke={stroke} strokeWidth={1}>
       <line x1={cx} x2={cx} y1={py(max)} y2={py(q3)} />
       <line x1={cx} x2={cx} y1={py(q1)} y2={py(min)} />
       <line x1={cx - cap} x2={cx + cap} y1={py(max)} y2={py(max)} />
@@ -94,7 +95,7 @@ export function BoxPlot({ data, sample, yLabel, height = 380 }: BoxPlotProps) {
 
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <ComposedChart data={rows} margin={{ top: 8, right: 8, bottom: yLabel ? 16 : 0, left: 0 }}>
+      <ComposedChart className="pathways-chart" data={rows} margin={{ top: 8, right: 8, bottom: yLabel ? 16 : 0, left: 0 }}>
         <CartesianGrid vertical={false} stroke="var(--neutral-200)" />
         <XAxis dataKey="segment" tickLine={false} axisLine={{ stroke: 'var(--neutral-300)' }} tick={AXIS_TICK} interval={0} />
         <YAxis domain={[lo, hi]} ticks={ticks} tickLine={false} axisLine={false} tick={AXIS_TICK} width={40}

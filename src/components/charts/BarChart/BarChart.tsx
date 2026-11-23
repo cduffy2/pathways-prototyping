@@ -1,5 +1,6 @@
 import { Bar, BarChart as RBarChart, LabelList, ReferenceLine, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { AXIS_TICK, SERIES_COLOUR, VALUE_LABEL, formatPercent, sortBySegment } from '../chartUtils';
+import '../charts.css';
 
 export interface SegmentValue {
   /** Segment code, e.g. "R3.1". */
@@ -31,9 +32,9 @@ interface BarShapeProps { x?: number; y?: number; width?: number; height?: numbe
 
 function BarShape({ x = 0, y = 0, width = 0, height = 0, payload, fill }: BarShapeProps) {
   if (payload?.value === null) {
-    return <rect x={x + 0.5} y={y + 0.5} width={width - 1} height={Math.max(height - 1, 0)} fill="var(--neutral-200)" stroke="var(--neutral-500)" strokeDasharray="4 3" />;
+    return <rect className="chart-mark" x={x + 0.5} y={y + 0.5} width={width - 1} height={Math.max(height - 1, 0)} fill="var(--neutral-200)" stroke="var(--neutral-500)" strokeDasharray="4 3" />;
   }
-  return <rect x={x} y={y} width={width} height={height} fill={fill} />;
+  return <rect className="chart-mark" x={x} y={y} width={width} height={height} fill={fill} />;
 }
 
 /** One data point across segments. Segments are always in the standard order. */
@@ -46,7 +47,7 @@ export function BarChart({ data, average, showStandardError = false, colour = 'o
 
   return (
     <ResponsiveContainer width="100%" height={height}>
-      <RBarChart data={rows} margin={{ top: showStandardError ? 40 : 28, right: 8, bottom: 0, left: average !== undefined ? 48 : 8 }} barCategoryGap="18%">
+      <RBarChart className="pathways-chart" data={rows} margin={{ top: showStandardError ? 40 : 28, right: 8, bottom: 0, left: average !== undefined ? 48 : 8 }} barCategoryGap="18%">
         <XAxis dataKey="segment" tickLine={false} axisLine={{ stroke: 'var(--neutral-300)' }} tick={AXIS_TICK} interval={0} />
         <YAxis hide domain={[0, max]} />
         <Bar dataKey="plot" fill={fill} isAnimationActive={false} shape={(p: unknown) => <BarShape {...(p as BarShapeProps)} />}>

@@ -67,6 +67,7 @@ Chart titles use `--text-primary`. All other chart text uses `--text-tertiary`, 
 
 ## Interaction
 
+- **Hover:** every mark (bar, stacked segment, box, breakdown segment, pie slice, data point bar) darkens and gets a link-blue (`--text-link`) border, with a tooltip of its values. The kit does this through `src/components/charts/charts.css`; charts drawn any other way must match it.
 - **Stacked bar legend:** clicking a category isolates it as a bar chart, so segments compare from the same baseline.
 - **Box plots** get a "Help with understanding this chart" link (`ChartCard` `help`).
 - **Breakdown charts** have a Both / Urban / Rural filter; urban or rural rescales to 100%. Tiny pie slices (under 3%) have no label; hover shows the value.

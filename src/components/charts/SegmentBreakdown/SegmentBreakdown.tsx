@@ -6,6 +6,7 @@ import {
 import { SegmentPatternDefs, SegmentSwatch } from '../ChartPatterns';
 import '../StackedBarChart/StackedBarChart.css';
 import './SegmentBreakdown.css';
+import '../charts.css';
 
 export interface AreaBreakdown {
   /** Geographic area, e.g. "Baringo". */
@@ -93,13 +94,13 @@ export function SegmentBreakdownBar({ areas, filter = 'both', showLegend = true 
   return (
     <div className="segment-breakdown">
       <ResponsiveContainer width="100%" height={48 + rows.length * 64}>
-        <RBarChart data={rows} layout="vertical" margin={{ top: 0, right: 16, bottom: 0, left: 0 }} barGap={2} barCategoryGap={12}>
+        <RBarChart className="pathways-chart" data={rows} layout="vertical" margin={{ top: 0, right: 16, bottom: 0, left: 0 }} barGap={2} barCategoryGap={12}>
           <defs><SegmentPatternDefs prefix={id} /></defs>
           <XAxis type="number" orientation="top" domain={[0, 100]} ticks={[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]} tick={AXIS_TICK} tickLine={false} axisLine={false} />
           <YAxis type="category" dataKey="name" tick={AXIS_TICK} tickLine={false} axisLine={{ stroke: 'var(--neutral-300)' }} width={96} />
           <Tooltip content={<BreakdownTooltip />} cursor={{ fill: 'var(--neutral-100)' }} />
-          {filter === 'both' && <Bar dataKey="urbanTotal" stackId="type" barSize={6} fill={TYPE_COLOUR.urban} isAnimationActive={false} />}
-          {filter === 'both' && <Bar dataKey="ruralTotal" stackId="type" barSize={6} fill={TYPE_COLOUR.rural} isAnimationActive={false} />}
+          {filter === 'both' && <Bar className="segment-breakdown__type" dataKey="urbanTotal" stackId="type" barSize={6} fill={TYPE_COLOUR.urban} isAnimationActive={false} />}
+          {filter === 'both' && <Bar className="segment-breakdown__type" dataKey="ruralTotal" stackId="type" barSize={6} fill={TYPE_COLOUR.rural} isAnimationActive={false} />}
           {codes.map(c => (
             <Bar key={c} dataKey={c} stackId="seg" barSize={36} fill={segmentFill(id, segmentLevel(c), textures[c])} isAnimationActive={false} />
           ))}
@@ -156,10 +157,10 @@ export function SegmentPie({ area, filter = 'both', size = 220 }: SegmentPieProp
   return (
     <figure className="segment-pie">
       <figcaption className="segment-pie__name">{area.name}</figcaption>
-      <PieChart width={size} height={size}>
+      <PieChart className="pathways-chart" width={size} height={size}>
         <defs><SegmentPatternDefs prefix={id} /></defs>
         <Tooltip content={<PieTooltip />} />
-        <Pie data={slices} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={r} startAngle={90} endAngle={-270} label={label} labelLine={false} isAnimationActive={false} stroke="var(--common-white)" strokeWidth={1}>
+        <Pie className="segment-pie__slices" data={slices} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={r} startAngle={90} endAngle={-270} label={label} labelLine={false} isAnimationActive={false} stroke="var(--common-white)" strokeWidth={1}>
           {slices.map(s => <Cell key={s.name} fill={segmentFill(id, segmentLevel(s.name), textures[s.name])} />)}
         </Pie>
         {filter === 'both' && (

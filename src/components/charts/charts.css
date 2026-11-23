@@ -1,0 +1,32 @@
+/*
+ * Shared hover state for every chart mark (bars, stacked segments, boxes, breakdown segments,
+ * pie slices): the colour darkens and the border turns link blue. Scoped to .pathways-chart.
+ */
+.pathways-chart .recharts-bar-rectangle path,
+.pathways-chart .recharts-bar-rectangle .chart-mark,
+.pathways-chart .recharts-pie-sector path {
+  transition: filter var(--transition-fast), stroke var(--transition-fast);
+}
+
+.pathways-chart .recharts-bar-rectangle:hover path,
+.pathways-chart .recharts-bar-rectangle:hover rect.chart-mark,
+.pathways-chart .chart-mark--box:hover rect,
+.pathways-chart .segment-pie__slices .recharts-pie-sector:hover path {
+  filter: brightness(0.85);
+  stroke: var(--text-link);
+  stroke-width: 2;
+  stroke-dasharray: none;
+}
+
+.pathways-chart .chart-mark--box:hover line { stroke: var(--text-link); }
+.pathways-chart .chart-mark--box:hover circle { fill: var(--text-link); }
+
+/* Data point bars are HTML, not SVG */
+.data-point-bar__track:hover .data-point-bar__fill {
+  filter: brightness(0.85);
+  box-shadow: inset 0 0 0 2px var(--text-link);
+}
+.data-point-bar__track--na:hover { outline-color: var(--text-link); outline-style: solid; outline-width: 2px; }
+
+/* The urban/rural band is context, not a mark */
+.pathways-chart .segment-breakdown__type .recharts-bar-rectangle:hover path { filter: none; stroke: none; }
