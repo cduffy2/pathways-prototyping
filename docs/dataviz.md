@@ -19,7 +19,7 @@ Each chart shows **one data point**. Use **Recharts**; don't add another chart l
 
 1. **Same segment order everywhere:** R1, R3.1, R3.2, R4, U1, U2.1, U2.2, U4 (rural then urban, by level). A segment keeps its slot even with no data.
 2. **Title and plain-language description**, so the chart still makes sense when downloaded.
-3. **Show who was asked** under the chart, with a "Denominator:" label.
+3. **Denominator** under the chart, with a "Denominator:" label, only when it differs from the segmentation's default sample population (for example, women with a birth in the last five years rather than all women aged 15–49).
 4. **Value label on every bar**, so no axis is needed.
 5. **Missing data is never zero.** No data: keep the slot, dashed outline, neutral fill, label "N/A". A real zero: empty slot labelled "0%".
 6. **Benchmark:** bar charts and data point bars show the **sample average** as a dashed line with its value in a dark chip. Stacked bars add an **Average** bar after a dashed divider. Box plots show the **sample median** as its own box.
@@ -35,12 +35,12 @@ Each chart shows **one data point**. Use **Recharts**; don't add another chart l
 | Stacked bar categories | `--data-categorical-1`, `-2`, `-3`… **in order**, never picked by taste |
 | Segment fills (segment bar, pie, map) | `--vulnerability-*` for the segment's level, never categorical |
 
-- Each categorical colour has a main, darkened and light tone. Main and light tones fail contrast on white, so **value labels and outlines use the darkened tone**. Some darkened tones pass for lines but not text: check the contrast table in Figma before putting text in a data colour.
+- Each categorical colour has a main, darkened and light tone. **Text that sits on a data colour goes on the light tone**: all ten pass contrast there. Don't put text on the main or darkened tones.
 - If two neighbouring segments share a level (and so a colour), texture the second one, in this order: none, diagonal, grid, horizontal, vertical. Use textures only for this.
 
 ## Chart text
 
-All chart text uses `--text-tertiary`, so the data stays the focus.
+Chart titles use `--text-primary`. All other chart text uses `--text-tertiary`, so the data stays the focus.
 
 | Role | Style |
 |---|---|

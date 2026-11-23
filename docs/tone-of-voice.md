@@ -57,7 +57,7 @@ Clear, practical, and respectful. Users are policymakers, donors, analysts, and 
 
 - **Data point names** match live exactly, everywhere (chart, list, export).
 - **Description:** one plain sentence starting with who and what: "The percentage of women who received a comprehensive postnatal health assessment…"
-- **Denominator:** who was asked: "Women aged 15–49 with at least one birth in the five years preceding the survey".
+- **Denominator:** who was asked, shown only when it differs from the segmentation's default sample: "Women aged 15–49 with at least one birth in the five years preceding the survey".
 - **Benchmarks:** "Sample average" (bar), "Average" (stacked bar), "Sample median" (box plot).
 - **Missing data:** "N/A". Never "0" or "No data available".
 
