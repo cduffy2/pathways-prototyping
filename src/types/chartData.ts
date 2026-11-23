@@ -1,6 +1,7 @@
 export interface ChartDataPoint {
   segment: string;
-  value: number;
+  /** Percentage, or null when there is no data. Charts show null as N/A, never as zero. */
+  value: number | null;
   label: string;
 }
 

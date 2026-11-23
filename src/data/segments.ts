@@ -66,3 +66,9 @@ export const populationSegments: PopulationSegment[] = [
     color: 'green'
   }
 ];
+
+/**
+ * The segmentation's default sample population. Charts show a denominator only when a data point's
+ * denominator differs from this. See docs/dataviz.md.
+ */
+export const DEFAULT_SAMPLE = 'Women aged 15-49';

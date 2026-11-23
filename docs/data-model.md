@@ -47,7 +47,7 @@ ChartDataSet {
 StackedChartDataSet {
   title, subtitle, denominator, description;
   chartType: 'stacked';
-  categories: { key: string; label: string; color: string }[];   // colours in categorical order
+  categories: { key: string; label: string; color: string }[];   // color is ignored: the chart kit colours categories in categorical order
   data: { segment: string; [categoryKey: string]: number | string }[];  // each row sums to 100
 }
 ```
@@ -66,7 +66,7 @@ PopulationSegment { id: 'rural-4', type: 'rural' | 'urban', label: 'Rural', badg
 
 1. Add a `DataItem` to the right subcategory in `categories.ts` (kebab-case `id`, sentence-case `label` as on live, `healthAreas` for vulnerability factors).
 2. Add a matching entry in `chartDataSets` in `chartData.ts`, using the same `id` as the key.
-3. Include every segment in the standard order, even if a value is missing (see N/A below).
+3. Include every segment, even if a value is missing (use `value: null`). Row order doesn't matter: the chart kit sorts segments into the standard order.
 4. Fill in `denominator` and `description`. Charts without them don't meet the [dataviz rules](dataviz.md#rules-for-every-chart).
 
 ### Add a geography
@@ -89,16 +89,16 @@ Then group by `indicator_id` → `data[]` rows (pivot on `category_key` for stac
 ### Validation checklist
 
 - [ ] Every indicator id in `categories.ts` has a chart entry (or a deliberate empty state).
-- [ ] Segment codes match the sidebar segments, and rows are in the standard order.
+- [ ] Segment codes match the sidebar segments.
 - [ ] Bar values are 0–100 for percentages, and `label` matches `value` (`"8%"`).
 - [ ] Stacked rows sum to 100 (±1 for rounding).
-- [ ] Missing values are N/A, not `0`. The current types have no N/A field, so add `value: null` support before shipping real gaps (see [dataviz.md](dataviz.md#known-gaps-in-the-prototype)).
+- [ ] Missing values are `null`, not `0`. Bar charts show them as N/A. For stacked charts, pass `values: null` to the chart kit.
 - [ ] Benchmark (`medianLine`) matches the definition: sample average for bars, Average bar for stacked.
 - [ ] `denominator` and `description` are filled and written per [tone-of-voice.md](tone-of-voice.md).
 - [ ] `npx tsc -b` passes.
 
 ## Not real yet
 
-- **Standard errors** are generated from a hash of the segment name (`getBarStandardError` in `ChartViewerPanel.tsx`). Add an `se` field to `ChartDataSet` when real values are available.
+- **Standard errors** are generated from a hash of the segment name (`illustrativeStandardError` in `ChartViewerPanel.tsx`). Add an `se` field to `ChartDataSet` when real values are available.
 - **Prevalence map** values and **segment sizes** on the overview are hard-coded in their components.
 - The **AI assistant** (`#assistant`) is the only part that reaches real Pathways data, via the backend's MCP connection (`backend/main.py`).

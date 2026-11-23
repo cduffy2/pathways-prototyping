@@ -1,0 +1,21 @@
+.segment-breakdown { font-family: 'Inter', sans-serif; }
+
+.segment-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 48px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--neutral-outlined-border);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--text-tertiary);
+}
+
+.segment-legend__group { display: flex; flex-direction: column; gap: 8px; }
+.segment-legend__type { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--text-secondary); }
+.segment-legend__type-bar { width: 48px; height: 12px; border-radius: 2px; }
+.segment-legend__items { display: flex; flex-wrap: wrap; gap: 6px 16px; }
+
+.segment-pie { margin: 0; display: flex; flex-direction: column; align-items: center; font-family: 'Inter', sans-serif; }
+.segment-pie__name { font-size: 14px; font-weight: 600; color: var(--text-secondary); }

@@ -1,30 +1,19 @@
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  ReferenceLine,
-  LabelList,
-  ResponsiveContainer,
-  Tooltip
-} from 'recharts';
 import { chartDataSets } from '../../../data/chartData';
-import InfoOutlinedIcon from '../../../assets/icons/InfoOutlined.svg?react';
+import { DEFAULT_SAMPLE } from '../../../data/segments';
 import type { StackedChartDataSet, ChartDataSet } from '../../../types/chartData';
+import { AverageKey, BarChart, ChartCard, StackedBarChart } from '../../charts';
 import './ChartViewerPanel.css';
 
-// Generate a plausible standard error for a given segment value
-function getBarStandardError(segment: string, value: number): string {
+// Illustrative standard error for a segment's value. The prototype data has no real standard errors.
+function illustrativeStandardError(segment: string, value: number): number {
   let hash = 0;
   for (let i = 0; i < segment.length; i++) {
     hash = ((hash << 5) - hash) + segment.charCodeAt(i);
     hash |= 0;
   }
-  const base = Math.abs(hash % 10);
   const errors = [0.3, 0.5, 0.8, 1.1, 0.4, 0.7, 1.2, 0.6, 0.9, 1.5];
   const pctFactor = 1 + Math.sin((value / 100) * Math.PI) * 0.3;
-  const se = +(errors[base] * pctFactor).toFixed(1);
-  return `±${se}%`;
+  return +(errors[Math.abs(hash % 10)] * pctFactor).toFixed(1);
 }
 
 interface ChartViewerPanelProps {
@@ -45,235 +34,46 @@ export function ChartViewerPanel({ dataItemId, showStandardError = false }: Char
   if (!chartData) {
     return (
       <div className="chart-viewer-panel">
-        <div className="chart-viewer-panel__empty">
-          Select a data item to view the chart
-        </div>
+        <div className="chart-viewer-panel__empty">Select a data item to view the chart</div>
       </div>
     );
   }
 
-  const isStacked = isStackedChart(chartData);
-
-  // Custom tooltip for stacked charts
-  const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="chart-viewer-panel__tooltip">
-          <p className="chart-viewer-panel__tooltip-label">{label}</p>
-          {payload.map((entry: any, index: number) => (
-            <p key={index} style={{ color: entry.color }}>
-              {entry.name}: {entry.value}%
-            </p>
-          ))}
-        </div>
-      );
-    }
-    return null;
-  };
-
   return (
     <div className="chart-viewer-panel">
       <div className="chart-viewer-panel__content">
-        <div className="chart-viewer-panel__header">
-          <h2 className="chart-viewer-panel__title">{chartData.title}</h2>
-          <div className="chart-viewer-panel__subtitle">
-            {!isStacked && <span className="chart-viewer-panel__median-line" />}
-            <span>{chartData.subtitle}</span>
-          </div>
-        </div>
-
-        <div className="chart-viewer-panel__chart-wrapper">
-          {isStacked ? (
-            // Stacked bar chart
-            <>
-              <div className="chart-viewer-panel__legend">
-                {chartData.categories.map((cat) => (
-                  <div key={cat.key} className="chart-viewer-panel__legend-item">
-                    <span
-                      className="chart-viewer-panel__legend-color"
-                      style={{ backgroundColor: cat.color }}
-                    />
-                    <span className="chart-viewer-panel__legend-label">{cat.label}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="chart-viewer-panel__chart">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart
-                    data={chartData.data}
-                    margin={{ top: 20, right: 20, bottom: -1, left: 20 }}
-                    barCategoryGap="15%"
-                  >
-                    <XAxis
-                      dataKey="segment"
-                      axisLine={false}
-                      tickLine={false}
-                      tick={false}
-                      padding={{ left: 0, right: 0 }}
-                    />
-                    <YAxis hide domain={[0, 100]} />
-                    <Tooltip content={<CustomTooltip />} />
-                    {chartData.categories.map((cat, index) => (
-                      <Bar
-                        key={cat.key}
-                        dataKey={cat.key}
-                        stackId="stack"
-                        fill={cat.color}
-                        name={cat.label}
-                        radius={
-                          index === chartData.categories.length - 1
-                            ? [0, 0, 0, 0]
-                            : [0, 0, 0, 0]
-                        }
-                      />
-                    ))}
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-              <div className="chart-viewer-panel__x-axis">
-                {chartData.data.map((item) => (
-                  <div key={item.segment} className="chart-viewer-panel__x-label">
-                    {item.segment}
-                  </div>
-                ))}
-              </div>
-            </>
-          ) : (
-            // Regular bar chart
-            <>
-              <div className="chart-viewer-panel__chart">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart
-                    data={chartData.data}
-                    margin={{ top: 34, right: 20, bottom: -1, left: 60 }}
-                    barCategoryGap="15%"
-                  >
-                    <defs>
-                      <filter id="labelBackground" x="-50%" y="-50%" width="200%" height="200%">
-                        <feFlood floodColor="#ffffff" result="bg" />
-                        <feMerge>
-                          <feMergeNode in="bg" />
-                          <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                      </filter>
-                    </defs>
-                    <XAxis
-                      dataKey="segment"
-                      axisLine={false}
-                      tickLine={false}
-                      tick={false}
-                      padding={{ left: 0, right: 0 }}
-                    />
-                    <YAxis hide domain={[0, 100]} />
-                    {chartData.medianLine && (
-                      <ReferenceLine
-                        y={chartData.medianLine}
-                        stroke="#555e68"
-                        strokeDasharray="10 4"
-                        strokeWidth={1}
-                        label={(props: any) => {
-                          const { viewBox } = props;
-                          if (!viewBox) return null;
-
-                          return (
-                            <g style={{ zIndex: 1 }}>
-                              <rect
-                                x={viewBox.x - 38}
-                                y={viewBox.y - 10}
-                                width={32}
-                                height={20}
-                                fill="#555e68"
-                                rx={2}
-                              />
-                              <text
-                                x={viewBox.x - 22}
-                                y={viewBox.y + 4}
-                                fill="#ffffff"
-                                fontSize={12}
-                                fontWeight={600}
-                                fontFamily="Inter"
-                                textAnchor="middle"
-                              >
-                                {chartData.medianLine}%
-                              </text>
-                            </g>
-                          );
-                        }}
-                      />
-                    )}
-                    <Bar dataKey="value" fill="#88c1fd" radius={[0, 0, 0, 0]}>
-                      <LabelList
-                        dataKey="label"
-                        position="top"
-                        content={(props: any) => {
-                          const { x, y, width, value, index } = props;
-                          const dataPoint = chartData.data[index];
-                          const se = showStandardError && dataPoint ? getBarStandardError(String(dataPoint.segment), dataPoint.value) : null;
-                          return (
-                            <g style={{ zIndex: 100 }}>
-                              <rect
-                                x={x + width / 2 - 24}
-                                y={se ? y - 32 : y - 18}
-                                width={48}
-                                height={se ? 32 : 18}
-                                fill="#ffffff"
-                                rx={2}
-                              />
-                              <text
-                                x={x + width / 2}
-                                y={se ? y - 18 : y - 4}
-                                fill="#171a1c"
-                                fontSize={14}
-                                fontFamily="Inter"
-                                fontWeight={400}
-                                textAnchor="middle"
-                              >
-                                {value}
-                              </text>
-                              {se && (
-                                <text
-                                  x={x + width / 2}
-                                  y={y - 4}
-                                  fill="#666"
-                                  fontSize={12}
-                                  fontFamily="Inter"
-                                  fontWeight={400}
-                                  textAnchor="middle"
-                                >
-                                  {se}
-                                </text>
-                              )}
-                            </g>
-                          );
-                        }}
-                      />
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-              <div className="chart-viewer-panel__x-axis chart-viewer-panel__x-axis--with-median">
-                {chartData.data.map((item) => (
-                  <div key={String(item.segment)} className="chart-viewer-panel__x-label">
-                    {String(item.segment)}
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-          <div className="chart-viewer-panel__denominator">
-            <InfoOutlinedIcon className="chart-viewer-panel__info-icon" />
-            <span className="chart-viewer-panel__denominator-label">Denominator:</span>
-            <span className="chart-viewer-panel__denominator-value">
-              {chartData.denominator}
-            </span>
-          </div>
-
-          <div className="chart-viewer-panel__footer">
-            <div className="chart-viewer-panel__description">
-              <p className="chart-viewer-panel__description-text">{chartData.description}</p>
-            </div>
-          </div>
-        </div>
+        {isStackedChart(chartData) ? (
+          <ChartCard
+            className="chart-viewer-panel__card"
+            title={chartData.title}
+            denominator={chartData.denominator}
+            defaultSample={DEFAULT_SAMPLE}
+            description={chartData.description}
+          >
+            <StackedBarChart
+              categories={chartData.categories.map(c => ({ key: c.key, label: c.label }))}
+              data={chartData.data.map(row => ({
+                segment: String(row.segment),
+                values: Object.fromEntries(chartData.categories.map(c => [c.key, Number(row[c.key] ?? 0)])),
+              }))}
+            />
+          </ChartCard>
+        ) : (
+          <ChartCard
+            className="chart-viewer-panel__card"
+            title={chartData.title}
+            chartKey={chartData.medianLine !== undefined ? <AverageKey /> : undefined}
+            denominator={chartData.denominator}
+            defaultSample={DEFAULT_SAMPLE}
+            description={chartData.description}
+          >
+            <BarChart
+              data={chartData.data.map(d => ({ segment: d.segment, value: d.value, standardError: d.value === null ? undefined : illustrativeStandardError(d.segment, d.value) }))}
+              average={chartData.medianLine}
+              showStandardError={showStandardError}
+            />
+          </ChartCard>
+        )}
       </div>
     </div>
   );

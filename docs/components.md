@@ -37,6 +37,8 @@ import { Button, Toggle, RadioCards, Modal } from '../../components/ui';
 | `EmptyState` | Nothing to show, or no search results |
 | `Pagination` | Long lists of content |
 
+For charts, use the chart kit in `src/components/charts/` (live at `#charts`), described in [dataviz.md](dataviz.md).
+
 Existing pages still use their own hand-written versions of some of these. Use the kit for anything new, and swap it in when you touch an old page.
 
 ## Layout
@@ -113,7 +115,7 @@ Taken from the Figma feature files. Follow these before inventing a pattern.
 |---|---|
 | `data-browser/PageHeader` | Tool header: title, description, Download/Compare, standard-error toggle, health area chips. Collapses to an **Actions ⋮** menu below 900px. |
 | `data-browser/DataCategoryPanel` | Searchable indicator list by category and subcategory, with checkboxes to pick indicators. |
-| `data-browser/ChartViewerPanel` | One indicator as a bar or stacked bar chart. See [dataviz.md](dataviz.md). |
+| `data-browser/ChartViewerPanel` | The data browser's chart panel. Uses the chart kit (`src/components/charts/`); see [dataviz.md](dataviz.md). |
 | `data-browser/PopulationSegmentsAlt` | Segment overview (size, level, urban/rural) on the overview page. Use this, not the older `PopulationSegments`. |
 | `data-browser/*Modal` | Data source, source data, technical notes and urban/rural definition modals. |
 | `compare-segments/AddDataModal` | Pick indicators to add to a comparison. |
@@ -132,7 +134,7 @@ Taken from the Figma feature files. Follow these before inventing a pattern.
 
 ## In Storybook, not built here yet
 
-Match the story before building: [Explainer card](https://storybook.withpathways.org/?path=/story/components-cards-explainer-card--default), [Geography card](https://storybook.withpathways.org/?path=/story/components-cards-geography-card--default), [Legend](https://storybook.withpathways.org/?path=/story/components-legend--vulnerability-levels), [PieChart](https://storybook.withpathways.org/?path=/docs/components-charts-piechart--docs), [PlotChart](https://storybook.withpathways.org/?path=/docs/components-charts-plotchart--docs).
+Match the story before building: [Explainer card](https://storybook.withpathways.org/?path=/story/components-cards-explainer-card--default), [Geography card](https://storybook.withpathways.org/?path=/story/components-cards-geography-card--default), [Legend](https://storybook.withpathways.org/?path=/story/components-legend--vulnerability-levels).
 
 ## Patterns inside pages
 

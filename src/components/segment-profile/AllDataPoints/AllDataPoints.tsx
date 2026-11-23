@@ -6,6 +6,7 @@ import NutritionIcon from '../../../assets/icons/nutrition.svg?react';
 import FamilyPlanningIcon from '../../../assets/icons/family-planning.svg?react';
 import { Checkbox } from '../../common/Checkbox';
 import type { Page } from '../../layout/LeftSidebar/LeftSidebar';
+import { DataPointBar } from '../../charts';
 import minilineIcon from '../../../assets/icons/Miniline.png';
 import CancelFilledIcon from '../../../assets/icons/CancelFilled.svg?react';
 import { ExportModal } from '../ExportModal/ExportModal';
@@ -182,7 +183,7 @@ function DataCard({ item, isSelected, showCheckbox, hasAnySelections, showStanda
                   <div className="all-data-points__tooltip-line" />
                 </div>
                 <span className="all-data-points__tooltip-text">
-                  Median across sample population: {item.medianValue}
+                  Sample average: {item.medianValue}
                 </span>
               </div>
             </div>
@@ -201,38 +202,15 @@ function DataCard({ item, isSelected, showCheckbox, hasAnySelections, showStanda
       )}
       <span className="all-data-points__card-label">{item.label}</span>
       <div className="all-data-points__card-bar-wrapper">
-        <div className="all-data-points__card-bar-container">
-          <div className="all-data-points__card-bar-track">
-            <div
-              className={`all-data-points__card-bar-fill${isVulnerability ? ' all-data-points__card-bar-fill--vulnerability' : ''}`}
-              style={{ width: `${item.percentage}%` }}
-            />
-            {item.medianPercentage !== undefined && (
-              <div
-                className="all-data-points__card-bar-median"
-                style={{ left: `${item.medianPercentage}%` }}
-              />
-            )}
-          </div>
-          <span className="all-data-points__card-percentage">
-            {item.percentage}%
-            {showStandardError && (
-              <span className="all-data-points__card-se"> {getStandardError(item.id, item.percentage)}</span>
-            )}
-          </span>
-        </div>
-        {item.medianPercentage !== undefined && (
-          <div className="all-data-points__tooltip">
-            <div className="all-data-points__tooltip-content">
-              <div className="all-data-points__tooltip-indicator">
-                <div className="all-data-points__tooltip-line" />
-              </div>
-              <span className="all-data-points__tooltip-text">
-                Median across sample population: {item.medianPercentage}%
-              </span>
-            </div>
-          </div>
-        )}
+        <DataPointBar
+          label={item.label}
+          hideLabel
+          value={item.percentage ?? null}
+          average={item.medianPercentage}
+          type={isVulnerability ? 'factor' : 'outcome'}
+          showStandardError={showStandardError}
+          standardError={item.percentage !== undefined ? parseFloat(getStandardError(item.id, item.percentage).replace(/[^0-9.]/g, '')) : undefined}
+        />
       </div>
     </div>
   );

@@ -74,6 +74,7 @@ Hash routes are defined in `src/App.tsx`. Responsiveness is described in [layout
 | `article-detail` | Older article template | Site | Not yet |
 | `contact` | Contact form | Site | Responsive |
 | `components` | Shared UI kit gallery, for prototypers (not linked from the nav) | Utility | Responsive |
+| `charts` | Chart kit gallery, for prototypers (not linked from the nav) | Utility | Responsive |
 | `not-found` | 404 | Site | — |
 | `loading` | Loading state demo | — | — |
 

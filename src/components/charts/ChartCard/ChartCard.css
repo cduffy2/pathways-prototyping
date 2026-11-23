@@ -1,0 +1,97 @@
+.chart-card {
+  margin: 0;
+  border: 1px solid var(--neutral-outlined-border);
+  border-radius: 6px;
+  background: var(--common-white);
+  font-family: 'Inter', sans-serif;
+}
+
+.chart-card__body { padding: 24px 24px 16px; }
+
+.chart-card__header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.chart-card__title { margin: 0; font-size: 18px; font-weight: 600; line-height: 1.66; color: var(--text-primary); }
+
+.chart-card__download { position: absolute; top: 0; right: 0; }
+
+.chart-card__key {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 16px;
+  font-size: 14px;
+  color: var(--text-tertiary);
+}
+
+.chart-card__help {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-link);
+  cursor: pointer;
+}
+.chart-card__help svg { width: 16px; height: 16px; }
+.chart-card__help:focus-visible { outline: 2px solid var(--focus-visible); outline-offset: 2px; }
+
+.chart-card__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+}
+.chart-card__hint svg,
+.chart-card__denominator svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+.chart-card__notice { margin-bottom: 16px; }
+
+.chart-card__chart { position: relative; width: 100%; }
+
+.chart-card__denominator {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 4px;
+  margin: 12px 0 0;
+  font-size: 14px;
+  line-height: 1.43;
+  color: var(--text-tertiary);
+  text-align: center;
+}
+.chart-card__denominator strong { font-weight: 600; }
+
+.chart-card__description {
+  padding: 12px 24px;
+  border-top: 1px solid var(--neutral-outlined-border);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-tertiary);
+}
+
+/* Shared chart pieces */
+.chart-key-item { display: inline-flex; align-items: center; gap: 6px; }
+.chart-key-line { width: 20px; border-top: 1px dashed var(--text-tertiary); }
+.chart-swatch { flex-shrink: 0; border-radius: 2px; }
+.chart-swatch--na { width: 16px; height: 16px; border: 1px dashed var(--neutral-500); background: var(--neutral-200); }
+
+@media (max-width: 599.98px) {
+  .chart-card__body { padding: 16px 12px 12px; }
+  .chart-card__download { position: static; }
+  .chart-card__description { padding: 12px; }
+}

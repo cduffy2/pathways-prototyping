@@ -1,0 +1,27 @@
+.data-point-bar { display: flex; flex-direction: column; gap: 6px; font-family: 'Inter', sans-serif; }
+
+.data-point-bar__row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.data-point-bar__label { font-size: 16px; line-height: 1.4; color: var(--text-primary); }
+.data-point-bar__label--hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.data-point-bar__label--hidden + .data-point-bar__value { margin-left: auto; }
+.data-point-bar__value { font-size: 16px; font-weight: 600; color: var(--text-primary); white-space: nowrap; }
+.data-point-bar__se { font-size: 12px; font-weight: 400; color: var(--text-tertiary); }
+
+.data-point-bar__track {
+  position: relative;
+  height: 12px;
+  border-radius: 2px;
+  background: var(--neutral-200);
+}
+.data-point-bar__track--na { background: var(--neutral-200); outline: 1px dashed var(--neutral-500); outline-offset: -1px; }
+
+.data-point-bar__fill { height: 100%; border-radius: 2px 0 0 2px; }
+
+.data-point-bar__average {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 0;
+  border-left: 2px dashed var(--text-secondary);
+  transform: translateX(-1px);
+}

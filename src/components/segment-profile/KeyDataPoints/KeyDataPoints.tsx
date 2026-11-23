@@ -1,4 +1,5 @@
 import minilineIcon from '../../../assets/icons/Miniline.png';
+import { DataPointBar } from '../../charts';
 import './KeyDataPoints.css';
 
 interface DataPoint {
@@ -38,43 +39,13 @@ interface DataBarProps extends DataPoint {
 }
 
 function DataBar({ label, percentage, medianPercentage, variant = 'health' }: DataBarProps) {
-  const fillClassName = variant === 'vulnerability'
-    ? 'key-data-points__bar-fill key-data-points__bar-fill--vulnerability'
-    : 'key-data-points__bar-fill';
-
   return (
-    <div className="key-data-points__bar-item">
-      <span className="key-data-points__bar-label">{label}</span>
-      <div className="key-data-points__bar-wrapper">
-        <div className="key-data-points__bar-container">
-          <div className="key-data-points__bar-track">
-            <div
-              className={fillClassName}
-              style={{ width: `${percentage}%` }}
-            />
-            {medianPercentage !== undefined && (
-              <div
-                className="key-data-points__bar-median"
-                style={{ left: `${medianPercentage}%` }}
-              />
-            )}
-          </div>
-          <span className="key-data-points__bar-percentage">{percentage}%</span>
-        </div>
-        {medianPercentage !== undefined && (
-          <div className="key-data-points__tooltip">
-            <div className="key-data-points__tooltip-content">
-              <div className="key-data-points__tooltip-indicator">
-                <div className="key-data-points__tooltip-line" />
-              </div>
-              <span className="key-data-points__tooltip-text">
-                Median across sample population: {medianPercentage}%
-              </span>
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+    <DataPointBar
+      label={label}
+      value={percentage}
+      average={medianPercentage}
+      type={variant === 'vulnerability' ? 'factor' : 'outcome'}
+    />
   );
 }
 
@@ -91,7 +62,7 @@ function SimpleValue({ label, value, medianValue }: SimpleValuePoint) {
                 <div className="key-data-points__tooltip-line" />
               </div>
               <span className="key-data-points__tooltip-text">
-                Median across sample population: {medianValue}
+                Sample average: {medianValue}
               </span>
             </div>
           </div>
