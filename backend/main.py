@@ -30,7 +30,8 @@ app.add_middleware(
 async def health():
     return JSONResponse({"status": "ok"})
 
-MCP_URL = "https://pathways.fastmcp.app/mcp"
+# Pathways data tools (MCP server). Set MCP_URL to your own server; the default is the original team's.
+MCP_URL = os.environ.get("MCP_URL", "https://pathways.fastmcp.app/mcp")
 
 SYSTEM_PROMPT = """You are the Pathways AI Assistant, a specialist in analysing health segmentation data for low and middle income countries.
 

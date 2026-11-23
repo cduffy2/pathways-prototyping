@@ -4,6 +4,10 @@ A clickable React prototype of the [Pathways digital platform](https://withpathw
 
 > Working with an AI agent? Start with [CLAUDE.md](CLAUDE.md). It lists the rules and which doc to read for each task.
 
+**Live preview:** https://pathways-prototyping.vercel.app. Building blocks, live with every state: [`#components`](https://pathways-prototyping.vercel.app/#components) (UI kit) and [`#charts`](https://pathways-prototyping.vercel.app/#charts) (chart kit).
+
+**Using this for your own work?** Fork the repo and use it as you need. This repository stays with the original team, so make changes in your fork. The [forking checklist](#forking-checklist) covers what to change first.
+
 ## Quick start
 
 Requires Node 20+.
@@ -32,7 +36,7 @@ pip install -r requirements.txt
 uvicorn main:app --reload --port 8000   # Vite proxies /api → localhost:8000 in dev
 ```
 
-For deployed builds, set `VITE_BACKEND_URL` in `.env.production` (it ships with a placeholder). If it's unset, `src/pages/AssistantPage/ConversationContext.tsx` falls back to the original team's backend, so change that fallback too. `backend/railway.json` deploys it to Railway. Set `ALLOWED_ORIGINS` there to your frontend URL.
+For deployed builds, deploy the backend yourself (`backend/railway.json` deploys it to Railway) and set `VITE_BACKEND_URL` to its URL, in `.env.production` or your host's environment variables. Without it, the Assistant page says it isn't connected; there is no fallback to anyone else's server. On the backend, set `ALLOWED_ORIGINS` to your frontend URL and `MCP_URL` to your own Pathways data tools server (it defaults to the original team's).
 
 ### Deploy
 
@@ -44,9 +48,9 @@ The frontend is a static Vite build. It is set up for Vercel: `vercel.json` rewr
 |---|---|
 | [docs/design-system.md](docs/design-system.md) | Colour, type, spacing tokens and how to use them |
 | [docs/layout.md](docs/layout.md) | Page templates, breakpoints, desktop-only tools |
-| [docs/components.md](docs/components.md) | Prototype components and their Storybook equivalents |
+| [docs/components.md](docs/components.md) | The shared UI kit, which component to use where, and Storybook equivalents |
 | [docs/information-architecture.md](docs/information-architecture.md) | Pages, objects (OOUX) and navigation |
-| [docs/dataviz.md](docs/dataviz.md) | Chart types and presentation rules |
+| [docs/dataviz.md](docs/dataviz.md) | The chart kit, chart types and presentation rules |
 | [docs/data-model.md](docs/data-model.md) | Data shapes, adding indicators, swapping in real data |
 | [docs/tone-of-voice.md](docs/tone-of-voice.md) | Writing style, terms, labels and caveats |
 
@@ -63,6 +67,8 @@ src/
   main.tsx             Entry point
   pages/<PageName>/    One folder per page: PageName.tsx + PageName.css
   components/
+    ui/                Shared UI kit: Button, Toggle, RadioCards, Modal… (live at #components)
+    charts/            Chart kit: bar, stacked, box plot, breakdown, pie… (live at #charts)
     layout/            PrimaryNavBar, LeftSidebar, Footer, GlobalSearch
     common/            Shared building blocks (Checkbox, MobileNotice, AboutThisContent…)
     data-browser/      Data browser panels, chart viewer, modals
@@ -93,7 +99,8 @@ There's no router library. `App.tsx` keeps `currentPage` in state and mirrors it
 
 ## Forking checklist
 
-- [ ] Update the title and description in `index.html` and `public/og-image.png`.
-- [ ] Set `VITE_BACKEND_URL` (or remove the Assistant page if you don't need it).
+- [ ] Connect your fork to your own host (e.g. Vercel) and update the preview links in this README.
+- [ ] Update the title, description and share image links in `index.html`, and `public/og-image.png`.
+- [ ] Deploy your own assistant backend and set `VITE_BACKEND_URL` and `MCP_URL`, or remove the Assistant page if you don't need it.
 - [ ] Replace illustrative data in `src/data/` if you're testing with real data. See [docs/data-model.md](docs/data-model.md).
 - [ ] Read [CLAUDE.md](CLAUDE.md) and keep it current as your team adds conventions.

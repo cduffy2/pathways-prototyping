@@ -286,9 +286,10 @@ export function ConversationProvider({ children }: { children: ReactNode }) {
 
     (async () => {
       try {
-        const backendUrl = import.meta.env.DEV
-          ? '/api/chat'
-          : `${import.meta.env.VITE_BACKEND_URL ?? 'https://pathways-ai-production.up.railway.app'}/chat`;
+        // Dev uses the Vite proxy to a local backend. Deployed builds need VITE_BACKEND_URL (see README).
+        const deployedBackend = import.meta.env.VITE_BACKEND_URL;
+        const backendUrl = import.meta.env.DEV ? '/api/chat' : deployedBackend ? `${deployedBackend}/chat` : null;
+        if (!backendUrl) throw new Error('NO_BACKEND');
         const response = await fetch(backendUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -430,7 +431,9 @@ export function ConversationProvider({ children }: { children: ReactNode }) {
                     ...m,
                     isStreaming: false,
                     error: true,
-                    content: m.content || 'Failed to connect to the assistant backend. Make sure it is running on port 8000.',
+                    content: m.content || ((err as Error).message === 'NO_BACKEND'
+                      ? 'The assistant isn\'t connected to a backend yet. Set VITE_BACKEND_URL and redeploy. See the README.'
+                      : 'Failed to connect to the assistant backend. Make sure it is running (locally on port 8000).'),
                   }
                 : m
             ),
