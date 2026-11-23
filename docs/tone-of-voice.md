@@ -26,21 +26,57 @@ Clear, practical, and respectful. Users are policymakers, donors, analysts, and 
 - **Lists:** capitalise the first word, no end punctuation unless items are full sentences. Numbered lists only for steps.
 - **Segment codes:** R3.1.
 
-## Preferred terms
+## Terminology
 
-| Use | Not |
+From the style guide, where terms were tested with Pathways users. Use them exactly, including capitals, in UI copy, page names and placeholder content. Terms marked † come from the live platform rather than the guide. Fuller definitions are in the Pathways Glossary (linked from the style guide).
+
+### The platform
+
+| Use | Meaning | Don't use |
+|---|---|---|
+| **digital platform** | Everything users reach: data, tools and resources | product, application, resource, Segment Explorer |
+| **tools** | The parts of the platform users work in (Data browser, Comparison tool, Prevalence map) | — |
+| **website** | Only the landing pages | — |
+| **Pathways** or **Pathways initiative** (lowercase i) | The whole endeavour: approach, tools and technical support | Pathways project |
+| **project** | One funded piece of work that uses a specific segmentation, e.g. "Pathways projects around the world" | initiative (for a single project) |
+| **Pathways Community** (capital C) | People and organisations who use, contribute to and support Pathways | Pathways community |
+
+### The approach and data
+
+| Use | Meaning | Don't use |
+|---|---|---|
+| **Pathways approach** | How Pathways combines qualitative and quantitative data to group households into segments | methodology, framework |
+| **segmentation** or **population segmentation** | Grouping households by social, economic, cultural and environmental conditions, not demographics or behaviours | — |
+| **segment** or **population segment** | One group from a segmentation, e.g. "women in this segment" | — |
+| **segment profile** † | A segment's data and insights in one place | — |
+| **domains** | The six groups of factors: the woman and her past experiences; household relationships; household economics and living conditions; social support; health mental models; human and natural systems. Use these names exactly. | — |
+| **vulnerability factors** † | Conditions that put women at greater risk of poor health | — |
+| **health outcomes and behaviours** | What the data measures about health | — |
+| **social determinants of health** | Non-medical factors that shape daily life | — |
+| **Pathways Survey** (capital S) | The household survey of women of reproductive age | Pathways survey |
+| **Pathways typing tools** (lowercase t) | Short question sets that place an individual into a segment | Pathways Typing Tools |
+| **findings** or **insights** | What the analysis shows | results, information |
+| **quantitative data**, **qualitative data** | — | — |
+| **woman-centred** (exactly this form) | e.g. "woman-centred data" | women-centred, woman-centered |
+
+### Vulnerability
+
+"Vulnerability" means being at greater risk of poor health because of social, cultural, behavioural, economic and environmental factors. Use it with care:
+
+- Describe what people are vulnerable *to*: "their specific vulnerabilities to poor health".
+- Levels describe segments, not people: "Most vulnerable segment", never "the most vulnerable women".
+- Don't use "vulnerability lens".
+
+### Words that work, and words to avoid
+
+| Use | Avoid |
 |---|---|
-| digital platform (overall), tools (its parts) | product, application |
-| Pathways approach | methodology, framework |
-| findings, insights | results |
-| improve | transform, accelerate, enhance |
-| population segment, segment, segmentation | — |
-| woman-centred (exactly this form) | women-centred, woman-centered |
-| domains (the six groups of vulnerability factors) | — |
-| health outcomes and behaviours, health equity, data-driven decision-making | design-driven, precision global health, vulnerability lens |
-| Pathways Survey, Pathways Community | Pathways survey, Pathways community |
-| Pathways typing tools | Pathways Typing Tools |
-| Pathways, Pathways initiative (the whole endeavour) | Pathways project (a project is one funded piece of work) |
+| improve, strengthen | transform, accelerate, enhance, innovate |
+| data-driven decision-making, health equity, human-centred design | design-driven, precision global health, vulnerability lens |
+
+### What users do with Pathways
+
+When copy needs to describe the value of a tool, use the four use cases: **Forecast** expected impact, **Resource** more effectively, **Design** for specific segments, **Evaluate** impact against a baseline. Users include ministries of health, donors, researchers and implementing partners.
 
 ## UI labels
 
