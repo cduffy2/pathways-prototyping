@@ -7,7 +7,7 @@ A clickable React prototype of the Pathways digital platform (withpathways.org).
 | If you are… | Read |
 |---|---|
 | Adding or changing a page, route or layout | [docs/layout.md](docs/layout.md), [docs/information-architecture.md](docs/information-architecture.md) |
-| Building or reusing UI | [docs/components.md](docs/components.md), [docs/design-system.md](docs/design-system.md) |
+| Building or reusing UI | [docs/components.md](docs/components.md), [docs/design-system.md](docs/design-system.md). Use the shared kit in `src/components/ui/` (live at `#components`). |
 | Adding a chart or changing how data is shown | [docs/dataviz.md](docs/dataviz.md) |
 | Adding indicators, segments, geographies or real data | [docs/data-model.md](docs/data-model.md) |
 | Writing any user-facing text | [docs/tone-of-voice.md](docs/tone-of-voice.md) |

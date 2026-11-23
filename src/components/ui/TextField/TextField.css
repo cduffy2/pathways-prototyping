@@ -1,0 +1,75 @@
+.text-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: 'Inter', sans-serif;
+}
+
+.text-field__label { font-size: 14px; font-weight: 600; color: var(--text-secondary); }
+
+.text-field__control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 12px;
+  border: 1px solid var(--neutral-300);
+  border-radius: 6px;
+  background: var(--common-white);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.text-field--search .text-field__control { height: 40px; border-color: transparent; background: var(--neutral-200); }
+
+.text-field__control:hover,
+.text-field.is-hover .text-field__control { border-color: var(--neutral-500); }
+
+.text-field__control:focus-within,
+.text-field.is-focus .text-field__control {
+  border-color: var(--focus-visible);
+  box-shadow: 0 0 0 1px var(--focus-visible);
+}
+
+.text-field__input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--text-primary);
+}
+.text-field__input::placeholder { color: var(--text-tertiary); }
+.text-field__input::-webkit-search-cancel-button { display: none; }
+
+.text-field__icon { width: 20px; height: 20px; color: var(--text-tertiary); flex-shrink: 0; }
+
+.text-field__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+}
+.text-field__clear svg { width: 16px; height: 16px; }
+.text-field__clear:hover { background: var(--neutral-300); color: var(--text-primary); }
+
+.text-field__message { margin: 0; font-size: 14px; color: var(--text-tertiary); }
+
+.text-field--error .text-field__control,
+.text-field--error .text-field__control:hover { border-color: var(--danger-500); }
+.text-field--error .text-field__control:focus-within { box-shadow: 0 0 0 1px var(--danger-500); }
+.text-field--error .text-field__message { color: var(--danger-500); }
+
+.text-field--disabled .text-field__control,
+.text-field--disabled .text-field__control:hover { border-color: var(--neutral-200); background: var(--neutral-100); }
+.text-field--disabled .text-field__input { color: var(--neutral-500); cursor: not-allowed; }
+.text-field--disabled .text-field__label { color: var(--neutral-500); }

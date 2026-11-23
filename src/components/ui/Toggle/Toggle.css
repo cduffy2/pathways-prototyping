@@ -1,0 +1,51 @@
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.toggle--disabled { cursor: not-allowed; color: var(--neutral-500); }
+
+.toggle__track {
+  position: relative;
+  width: 40px;
+  height: 20px;
+  padding: 0;
+  border: 1px solid var(--neutral-outlined-border);
+  border-radius: 16px;
+  background: transparent;
+  cursor: inherit;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.toggle__thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.toggle__track:hover:not(:disabled),
+.toggle.is-hover .toggle__track { border-color: var(--neutral-500); }
+
+.toggle__track--on { background: var(--neutral-700); border-color: var(--neutral-700); }
+.toggle__track--on .toggle__thumb { transform: translateX(20px); background: var(--common-white); }
+.toggle__track--on:hover:not(:disabled),
+.toggle.is-hover .toggle__track--on { background: var(--neutral-800); border-color: var(--neutral-800); }
+
+.toggle__track:focus-visible,
+.toggle.is-focus .toggle__track { outline: 2px solid var(--focus-visible); outline-offset: 2px; }
+
+.toggle__track:disabled { border-color: var(--neutral-200); }
+.toggle__track:disabled .toggle__thumb { background: var(--neutral-300); }
+.toggle__track--on:disabled { background: var(--neutral-200); border-color: var(--neutral-200); }
+.toggle__track--on:disabled .toggle__thumb { background: var(--common-white); }

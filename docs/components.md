@@ -4,10 +4,40 @@ What already exists, when to use it, and its production equivalent. Source of tr
 
 **Before building anything:**
 1. Check Storybook. If production has it, match its look and behaviour.
-2. Check this list. If the prototype has it, reuse or extend it.
+2. Check the shared UI kit (below) and this list. If the prototype has it, reuse or extend it.
 3. Only then build something new, and add it here.
 
 Components are plain React + CSS, one folder each, with BEM class names.
+
+## Shared UI kit
+
+**Start here.** `src/components/ui/` holds the basic controls, already matching Figma. See every one live, with all its states, at **`#components`** (`src/pages/ComponentsPage/`).
+
+```tsx
+import { Button, Toggle, RadioCards, Modal } from '../../components/ui';
+```
+
+| Component | Use for |
+|---|---|
+| `Button` | Actions: `solid`, `outlined`, `soft`, `plain`; `loading` and `disabled` built in |
+| `IconButton` | Close, pagination and carousel arrows (needs a `label`) |
+| `Checkbox`, `CheckboxItem` | Multi-select; `CheckboxItem` is a full-width clickable row |
+| `RadioGroup` | One choice from a few options, with optional hints |
+| `RadioCards` | `row`: health area filter. `list`: options that need detail, e.g. data source |
+| `SegmentedControl` | Switching views of the same data |
+| `Toggle` | Optional layers such as "Standard error" |
+| `Chip` | Tags, statuses, applied filters (`onRemove`) and vulnerability levels |
+| `TextField` | `search` for filtering lists, `field` for forms (with `error`) |
+| `Select` | One item from a set list |
+| `Tooltip` | Explaining a term or number |
+| `Tabs` | Sibling panels of content |
+| `Accordion` | Grouping long lists |
+| `Modal` | Focused tasks; full-screen sheet on phones |
+| `Notice` | Data caveats and limitations |
+| `EmptyState` | Nothing to show, or no search results |
+| `Pagination` | Long lists of content |
+
+Existing pages still use their own hand-written versions of some of these. Use the kit for anything new, and swap it in when you touch an old page.
 
 ## Layout
 
@@ -30,9 +60,9 @@ Components are plain React + CSS, one folder each, with BEM class names.
 
 | Control | Off | On | Reference |
 |---|---|---|---|
-| Checkbox | Outlined: white fill, `--neutral-400` border | Solid `--neutral-700` fill, white tick | `common/Checkbox` |
-| Toggle | Outlined track, grey thumb | Solid `--neutral-700` track, white thumb | `.page-header__toggle` |
-| Radio | Outlined ring | Ring stays outlined, with a `--text-primary` dot. Radios are never solid. | `.export-modal__radio` |
+| Checkbox | Outlined: white fill, `--neutral-400` border | Solid `--neutral-700` fill, white tick | `Checkbox` |
+| Toggle | Outlined track, grey thumb | Solid `--neutral-700` track, white thumb | `Toggle` |
+| Radio | Outlined ring | Ring stays outlined, with a `--text-primary` dot. Radios are never solid. | `RadioGroup` |
 
 - "On" is always dark neutral, never blue.
 - Hover goes one step darker (`--neutral-500` border off, `--neutral-800` fill on).
@@ -40,7 +70,7 @@ Components are plain React + CSS, one folder each, with BEM class names.
 
 ### Buttons
 
-Not a shared component yet. Copy the class pattern and match Storybook [Button](https://storybook.withpathways.org/?path=/story/components-buttons-button--default).
+Use `Button` from the kit. The example classes show where older pages hand-built each style.
 
 | Style | When | Look | Example class |
 |---|---|---|---|
@@ -102,7 +132,7 @@ Taken from the Figma feature files. Follow these before inventing a pattern.
 
 ## In Storybook, not built here yet
 
-Match the story before building: [Explainer card](https://storybook.withpathways.org/?path=/story/components-cards-explainer-card--default), [Geography card](https://storybook.withpathways.org/?path=/story/components-cards-geography-card--default), [Legend](https://storybook.withpathways.org/?path=/story/components-legend--vulnerability-levels), [GenericDropdown](https://storybook.withpathways.org/?path=/story/components-genericdropdown--uncontrolled), [GenericTooltip](https://storybook.withpathways.org/?path=/story/components-generictooltip--default), [Tooltip term](https://storybook.withpathways.org/?path=/story/components-tooltip-term--default), [ButtonGroupTabs](https://storybook.withpathways.org/?path=/story/components-buttongrouptabs--default), [PieChart](https://storybook.withpathways.org/?path=/docs/components-charts-piechart--docs), [PlotChart](https://storybook.withpathways.org/?path=/docs/components-charts-plotchart--docs).
+Match the story before building: [Explainer card](https://storybook.withpathways.org/?path=/story/components-cards-explainer-card--default), [Geography card](https://storybook.withpathways.org/?path=/story/components-cards-geography-card--default), [Legend](https://storybook.withpathways.org/?path=/story/components-legend--vulnerability-levels), [PieChart](https://storybook.withpathways.org/?path=/docs/components-charts-piechart--docs), [PlotChart](https://storybook.withpathways.org/?path=/docs/components-charts-plotchart--docs).
 
 ## Patterns inside pages
 

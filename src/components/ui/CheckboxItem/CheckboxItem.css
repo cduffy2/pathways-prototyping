@@ -1,0 +1,22 @@
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.checkbox-item:hover,
+.checkbox-item.is-hover { background: var(--neutral-plain-hoverbg); }
+
+.checkbox-item__label { flex: 1; line-height: 1.4; }
+.checkbox-item__meta { font-size: 14px; color: var(--text-tertiary); }
+
+.checkbox-item--disabled,
+.checkbox-item--disabled:hover { color: var(--neutral-500); background: transparent; cursor: not-allowed; }

@@ -1,0 +1,74 @@
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.radio-group__legend {
+  margin-bottom: 8px;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.radio-group__option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 40px;
+  font-size: 16px;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.radio-group__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.radio-group__ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--neutral-400);
+  border-radius: 50%;
+  background: var(--common-white);
+  flex-shrink: 0;
+  transition: border-color var(--transition-fast);
+}
+
+.radio-group__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  transform: scale(0);
+  transition: transform var(--transition-fast);
+}
+
+.radio-group__option:hover .radio-group__ring,
+.radio-group__option.is-hover .radio-group__ring { border-color: var(--neutral-500); }
+
+.radio-group__option--selected .radio-group__ring { border-color: var(--text-primary); }
+.radio-group__option--selected .radio-group__dot { transform: scale(1); }
+.radio-group__option--selected .radio-group__label { font-weight: 600; }
+
+.radio-group__input:focus-visible + .radio-group__ring,
+.radio-group__option.is-focus .radio-group__ring { outline: 2px solid var(--focus-visible); outline-offset: 2px; }
+
+.radio-group__hint { color: var(--text-tertiary); }
+
+.radio-group__option--disabled { color: var(--neutral-500); cursor: not-allowed; }
+.radio-group__option--disabled .radio-group__ring,
+.radio-group__option--disabled:hover .radio-group__ring { border-color: var(--neutral-300); background: var(--neutral-100); }
+.radio-group__option--disabled .radio-group__dot { background: var(--neutral-400); }

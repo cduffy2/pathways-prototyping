@@ -1,0 +1,28 @@
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.icon-button--md { width: 40px; height: 40px; }
+.icon-button--sm { width: 32px; height: 32px; }
+.icon-button svg { width: 20px; height: 20px; }
+
+.icon-button--outlined { background: var(--common-white); border-color: var(--neutral-outlined-border); border-radius: 50%; }
+
+.icon-button:hover:not(:disabled),
+.icon-button.is-hover { background: var(--neutral-plain-hoverbg); }
+.icon-button:active:not(:disabled),
+.icon-button.is-active { background: var(--neutral-plain-activebg); }
+
+.icon-button:focus-visible,
+.icon-button.is-focus { outline: 2px solid var(--focus-visible); outline-offset: 2px; }
+
+.icon-button:disabled { color: var(--neutral-500); cursor: not-allowed; }
+.icon-button--outlined:disabled { border-color: var(--neutral-200); }

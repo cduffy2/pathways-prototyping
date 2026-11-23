@@ -22,11 +22,12 @@ import { HowPathwaysDataPage } from './pages/HowPathwaysDataPage/HowPathwaysData
 import { TypingToolsPage } from './pages/TypingToolsPage/TypingToolsPage';
 import { KenyaTypingToolsPage } from './pages/KenyaTypingToolsPage/KenyaTypingToolsPage';
 import { GuideArticlePage } from './pages/GuideArticlePage/GuideArticlePage';
+import { ComponentsPage } from './pages/ComponentsPage/ComponentsPage';
 
-type Page = 'kenya-overview' | 'data-browser' | 'rural-4' | 'walk-in-her-shoes' | 'not-found' | 'compare-segments' | 'segmentations' | 'assistant' | 'prevalence-map' | 'welcome' | 'news' | 'news-detail' | 'resources' | 'contact' | 'article-detail' | 'resources-filtered' | 'loading' | 'domain-detail' | 'methodology-explainer' | 'how-pathways-data' | 'guide-article' | 'typing-tools' | 'kenya-typing-tools';
+type Page = 'kenya-overview' | 'data-browser' | 'rural-4' | 'walk-in-her-shoes' | 'not-found' | 'compare-segments' | 'segmentations' | 'assistant' | 'prevalence-map' | 'welcome' | 'news' | 'news-detail' | 'resources' | 'contact' | 'article-detail' | 'resources-filtered' | 'loading' | 'domain-detail' | 'methodology-explainer' | 'how-pathways-data' | 'guide-article' | 'typing-tools' | 'kenya-typing-tools' | 'components';
 
 // Pages that never show the loading spinner (meta/utility pages)
-const NO_SPINNER_PAGES: Page[] = ['loading'];
+const NO_SPINNER_PAGES: Page[] = ['loading', 'components'];
 
 // Data tool pages are desktop-only; they keep a 1200px minimum width
 const DESKTOP_ONLY_PAGES: Page[] = ['rural-4', 'walk-in-her-shoes', 'compare-segments', 'assistant', 'prevalence-map', 'domain-detail'];
@@ -76,6 +77,7 @@ function App() {
     if (hash === 'guide-article') return 'guide-article';
     if (hash === 'typing-tools') return 'typing-tools';
     if (hash === 'kenya-typing-tools') return 'kenya-typing-tools';
+    if (hash === 'components') return 'components';
     return 'welcome';
   });
 
@@ -131,6 +133,7 @@ function App() {
       else if (hash === 'guide-article') setCurrentPage('guide-article');
       else if (hash === 'typing-tools') setCurrentPage('typing-tools');
       else if (hash === 'kenya-typing-tools') setCurrentPage('kenya-typing-tools');
+      else if (hash === 'components') setCurrentPage('components');
       else setCurrentPage('segmentations');
     };
 
@@ -234,6 +237,8 @@ function App() {
             return <TypingToolsPage onNavigate={handleNavigate} currentPage={currentPage} />;
           case 'kenya-typing-tools':
             return <KenyaTypingToolsPage onNavigate={handleNavigate} currentPage={currentPage} />;
+          case 'components':
+            return <ComponentsPage onNavigate={handleNavigate} currentPage={currentPage} />;
           case 'guide-article':
             return <GuideArticlePage onNavigate={handleNavigate} currentPage={currentPage} navSection={selectedTag || 'understand'} />;
           case 'kenya-overview':

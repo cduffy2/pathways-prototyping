@@ -3,22 +3,40 @@ import './Checkbox.css';
 interface CheckboxProps {
   checked: boolean;
   onChange?: (checked: boolean) => void;
+  disabled?: boolean;
+  /** Accessible name when there is no visible label next to it. */
+  ariaLabel?: string;
   className?: string;
 }
 
-export function Checkbox({ checked, onChange, className = '' }: CheckboxProps) {
+export function Checkbox({ checked, onChange, disabled = false, ariaLabel, className = '' }: CheckboxProps) {
+  const toggle = () => {
+    if (!disabled) onChange?.(!checked);
+  };
+
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    onChange?.(!checked);
+    toggle();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault();
+      e.stopPropagation();
+      toggle();
+    }
   };
 
   return (
     <div
-      className={`checkbox ${checked ? 'checkbox--checked' : ''} ${className}`}
+      className={`checkbox ${checked ? 'checkbox--checked' : ''} ${disabled ? 'checkbox--disabled' : ''} ${className}`}
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
       role="checkbox"
       aria-checked={checked}
-      tabIndex={0}
+      aria-disabled={disabled || undefined}
+      aria-label={ariaLabel}
+      tabIndex={disabled ? -1 : 0}
     >
       {checked && (
         <svg

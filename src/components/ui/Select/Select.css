@@ -1,0 +1,66 @@
+.select {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 220px;
+  font-family: 'Inter', sans-serif;
+}
+
+.select__label { font-size: 14px; font-weight: 600; color: var(--text-secondary); }
+
+.select__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--neutral-300);
+  border-radius: 6px;
+  background: var(--common-white);
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--text-primary);
+  text-align: left;
+  cursor: pointer;
+}
+
+.select__trigger:hover:not(:disabled),
+.select.is-hover .select__trigger { border-color: var(--neutral-500); }
+.select__trigger:focus-visible,
+.select.is-focus .select__trigger { outline: 2px solid var(--focus-visible); outline-offset: 2px; }
+.select--open .select__trigger { border-color: var(--text-primary); }
+
+.select__placeholder { color: var(--text-tertiary); }
+.select__chevron { width: 20px; height: 20px; transition: transform var(--transition-fast); }
+.select--open .select__chevron { transform: rotate(180deg); }
+
+.select__menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  border: 1px solid var(--neutral-outlined-border);
+  border-radius: 6px;
+  background: var(--common-white);
+  box-shadow: 0 4px 16px rgba(21, 21, 21, 0.12);
+}
+
+.select__option {
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-size: 16px;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+.select__option:hover,
+.select__option:focus-visible { background: var(--neutral-plain-hoverbg); outline: 0; }
+.select__option--selected { background: var(--neutral-plain-activebg); font-weight: 600; }
+
+.select--disabled .select__trigger { border-color: var(--neutral-200); background: var(--neutral-100); color: var(--neutral-500); cursor: not-allowed; }
+.select--disabled .select__label { color: var(--neutral-500); }

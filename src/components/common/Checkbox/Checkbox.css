@@ -31,3 +31,32 @@
 .checkbox__icon {
   color: var(--common-white);
 }
+
+.checkbox.is-hover {
+  background-color: var(--neutral-100);
+  border-color: var(--neutral-500);
+}
+
+.checkbox--checked.is-hover {
+  background-color: var(--neutral-800);
+  border-color: var(--neutral-800);
+}
+
+.checkbox:focus-visible,
+.checkbox.is-focus {
+  outline: 2px solid var(--focus-visible);
+  outline-offset: 2px;
+}
+
+.checkbox--disabled,
+.checkbox--disabled:hover {
+  cursor: not-allowed;
+  background-color: var(--neutral-100);
+  border-color: var(--neutral-300);
+}
+
+.checkbox--disabled.checkbox--checked,
+.checkbox--disabled.checkbox--checked:hover {
+  background-color: var(--neutral-200);
+  border-color: var(--neutral-200);
+}
