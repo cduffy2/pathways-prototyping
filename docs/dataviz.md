@@ -1,73 +1,65 @@
 # Data visualisation
 
-How Pathways shows data. The source of truth is Zeroheight → Data visualisations ([Foundations](https://pathways.zeroheight.com/styleguide/s/102143/p/794ae7), [Chart types](https://pathways.zeroheight.com/styleguide/s/102143/p/12a009), [Data states](https://pathways.zeroheight.com/styleguide/s/102143/p/85d168)), with production components in Storybook → Charts and Maps. This doc summarises the rules and maps them to the prototype. For the data itself, see [data-model.md](data-model.md).
+Which chart to use and how to draw it. Source of truth: Figma [MUI for Pathways](https://www.figma.com/design/aHM114L0PSvgiAl29fkXSD/MUI-for-Pathways?node-id=415-13576) (pages "Zeroheight – Foundations" and "Zeroheight – Charts") and Zeroheight [Chart types](https://pathways.zeroheight.com/styleguide/s/102143/p/12a009). Production charts are in Storybook → Charts. Data structures are in [data-model.md](data-model.md).
 
 ## Choosing a chart
 
-Each chart shows **one data point**. Pick the chart by the question it answers:
+Each chart shows **one data point**. Use **Recharts**; don't add another chart library.
 
-| Chart | Answers | Prototype | Storybook |
-|---|---|---|---|
-| Bar | How do segments compare on one data point? | `ChartViewerPanel` (`chartType: 'bar'`) | [BarChart](https://storybook.withpathways.org/?path=/docs/components-charts-barchart--docs) |
-| Stacked bar | How does each segment split across the categories of one data point? | `ChartViewerPanel` (`chartType: 'stacked'`) | [StackedBarChart](https://storybook.withpathways.org/?path=/docs/components-charts-stackedbarchart--docs) |
-| Data point bars | How does one segment do on one data point? (profiles) | `KeyDataPoints`, `AllDataPoints` | [Data points](https://storybook.withpathways.org/?path=/docs/components-data-points--docs) |
-| Box plot | How spread out are values within each segment? | not built | [PlotChart](https://storybook.withpathways.org/?path=/docs/components-charts-plotchart--docs) |
-| Segment bar | Which segments make up each admin area's population? | Kenya overview (partial) | — |
-| Pie | Same as segment bar, one admin area at a time | not built | [PieChart](https://storybook.withpathways.org/?path=/docs/components-charts-piechart--docs) |
-| Prevalence map | Where is a segment most prevalent? | `PrevalenceMap` | [HeatMap](https://storybook.withpathways.org/?path=/story/components-maps-heatmap--with-level-selector) |
+| Chart | Use when the question is… | Prototype |
+|---|---|---|
+| Bar | How do segments compare on one data point? | `ChartViewerPanel` (`chartType: 'bar'`) |
+| Stacked bar | How does each segment split across the categories of one data point? | `ChartViewerPanel` (`chartType: 'stacked'`) |
+| Data point bars | How does one segment do on one data point? (profiles) | `KeyDataPoints`, `AllDataPoints` |
+| Box plot | How spread out are values within each segment? | not built ([PlotChart](https://storybook.withpathways.org/?path=/docs/components-charts-plotchart--docs)) |
+| Segment bar / pie | Which segments make up each admin area? | Kenya overview (partial) |
+| Prevalence map | Where is a segment most prevalent? | `PrevalenceMap` |
 
-Charts use **Recharts** (`recharts`). Don't add another chart library.
+## Rules for every chart
 
-## Shared rules
-
-1. **Segments always appear in the same order on every chart.** Live uses R1, R3.1, R3.2, R4, U1, U2.1, U2.2, U4 (by type, then level). Keep a segment's slot even when it has no data.
-2. **Every chart has a title and a plain-language description**, so it still makes sense once downloaded.
-3. **Show the denominator** (who was asked) under the chart: "Denominator: Women age 15-49 with a live birth in the last 3 years".
-4. **Never show missing data as zero.** No data → the slot stays, with a dashed outline, neutral fill and the label "N/A". Zero → empty slot labelled "0%".
-5. **Benchmarks:**
-   - Bar charts and data point bars → **sample average**, a dashed line, with its value in a dark chip.
-   - Stacked bars → an **Average** bar, set apart by a dashed divider.
-   - Box plots → **sample median**, as a sample comparison box.
-6. **Value labels on every bar**, so users don't need an axis.
-7. **Standard error** only appears when the user turns on the "Standard error" toggle.
+1. **Same segment order everywhere:** R1, R3.1, R3.2, R4, U1, U2.1, U2.2, U4 (rural then urban, by level). A segment keeps its slot even with no data.
+2. **Title and plain-language description**, so the chart still makes sense when downloaded.
+3. **Show who was asked** under the chart, with a "Denominator:" label.
+4. **Value label on every bar**, so no axis is needed.
+5. **Missing data is never zero.** No data: keep the slot, dashed outline, neutral fill, label "N/A". A real zero: empty slot labelled "0%".
+6. **Benchmark:** bar charts and data point bars show the **sample average** as a dashed line with its value in a dark chip. Stacked bars add an **Average** bar after a dashed divider. Box plots show the **sample median** as its own box.
+7. **Standard error** only when the user turns on the "Standard error" toggle.
 
 ## Colour
 
-| Use | Colour | Token |
-|---|---|---|
-| Single-series bar (no meaning in colour) | Categorical 1 (blue) | `--data-categorical-1` |
-| Health outcomes and behaviours | Categorical 1 | `--data-categorical-1` |
-| Vulnerability factors | Categorical 6 (slate blue) | `--data-categorical-6` |
-| Rural / Urban | Categorical 7 / 10 | `--segment-rural`, `--segment-urban` |
-| Categories in a stacked bar | Categorical 1, 2, 3… **in order**; don't pick by preference | `--data-categorical-*` |
-| Segment fills (segment bar, pie, map) | Vulnerability level, never categorical | `--vulnerability-*` |
+| Use | Token |
+|---|---|
+| Single series, and health outcomes and behaviours | `--data-categorical-1` |
+| Vulnerability factors | `--data-categorical-6` |
+| Rural / urban | `--segment-rural`, `--segment-urban` |
+| Stacked bar categories | `--data-categorical-1`, `-2`, `-3`… **in order**, never picked by taste |
+| Segment fills (segment bar, pie, map) | `--vulnerability-*` for the segment's level, never categorical |
 
-- Each categorical colour has main, darkened (outlines and text on colour) and light (backgrounds and hover) tones. See Foundations in Zeroheight.
-- When two neighbouring segments share a level (and so a colour), give the second one a texture, in this order: none, diagonal, grid, horizontal, vertical. Use a texture only in that case.
+- Each categorical colour has a main, darkened and light tone. Main and light tones fail contrast on white, so **value labels and outlines use the darkened tone**. Some darkened tones pass for lines but not text: check the contrast table in Figma before putting text in a data colour.
+- If two neighbouring segments share a level (and so a colour), texture the second one, in this order: none, diagonal, grid, horizontal, vertical. Use textures only for this.
 
-## Chart typography
+## Chart text
 
-Chart titles use `--text-primary`; all other chart text uses `--text-tertiary`, so the data stays the focus.
+All chart text uses `--text-tertiary`, so the data stays the focus.
 
-| Role | Zeroheight style | Prototype today |
-|---|---|---|
-| Chart title | `desktop/title-lg` | 18px, 600 |
-| Legend label | `desktop/body-sm` | 14px |
-| Helper hint ("Select a category to isolate it") | `desktop/body-xs` | not built |
-| Axis label (segment codes) | `typography/xs/500` | 12px, 500 |
-| Sample note / denominator | `desktop/title-sm` | 14px |
-| Description | `desktop/body-md` | 16px |
+| Role | Style |
+|---|---|
+| Chart title | Inter 18px, 600 |
+| Description | Inter 16px, 400 |
+| Legend label, denominator | Inter 14px (label 600, text 400) |
+| Axis label (segment codes) | Inter 12px, 500 |
+| Helper hint ("Click a category in the legend above to isolate it") | Inter 12px, 600 |
 
 ## Interaction
 
-- **Stacked bar legend is interactive**: selecting a category shows it on its own as a bar chart, so segments can be compared from the same baseline.
-- **Help for unfamiliar charts**: box plots get a "Help me understand this chart" link.
-- **Source data warning**: segmentations built on a Pathways Survey (nationally representative only) show a dismissible warning on sub-national charts. DHS-based segmentations don't.
-- **Download**: every chart can be exported (PNG/PDF/XLSX via `src/utils/exportCards.ts`).
+- **Stacked bar legend:** clicking a category isolates it as a bar chart, so segments compare from the same baseline.
+- **Box plots** get a "Help me understand this chart" link.
+- **Sub-national charts from a Pathways Survey segmentation** show a dismissible warning that state or county results are estimates. DHS-based segmentations don't.
+- **Download:** every chart exports to PNG, PDF or XLSX (`src/utils/exportCards.ts`).
 
 ## Known gaps in the prototype
 
-- The benchmark field is still called `medianLine` in `src/types/chartData.ts`, but it holds the sample average and is labelled that way.
-- Segment order in `chartData.ts` (U1, U2.2, U2.1, U4, R2…) doesn't match live order. Reorder when replacing data.
-- Standard errors are generated from a hash of the segment name (`getBarStandardError` in `ChartViewerPanel.tsx`). They are fake.
-- N/A slots and textures aren't implemented in the prototype charts yet.
+- The benchmark field is called `medianLine` in `src/types/chartData.ts` but holds the sample average.
+- Segment order in `chartData.ts` doesn't match the order above. Fix it when replacing data.
+- Standard errors are fake (hashed from the segment name in `ChartViewerPanel.tsx`).
+- N/A slots and textures aren't built yet.

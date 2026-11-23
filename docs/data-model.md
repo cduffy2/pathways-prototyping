@@ -67,7 +67,7 @@ PopulationSegment { id: 'rural-4', type: 'rural' | 'urban', label: 'Rural', badg
 1. Add a `DataItem` to the right subcategory in `categories.ts` (kebab-case `id`, sentence-case `label` as on live, `healthAreas` for vulnerability factors).
 2. Add a matching entry in `chartDataSets` in `chartData.ts`, using the same `id` as the key.
 3. Include every segment in the standard order, even if a value is missing (see N/A below).
-4. Fill in `denominator` and `description`. Charts without them don't meet the [dataviz rules](dataviz.md#shared-rules).
+4. Fill in `denominator` and `description`. Charts without them don't meet the [dataviz rules](dataviz.md#rules-for-every-chart).
 
 ### Add a geography
 
