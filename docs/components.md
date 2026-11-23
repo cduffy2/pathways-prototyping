@@ -26,6 +26,16 @@ Components are plain React + CSS, one folder each, with BEM class names.
 | `common/MobileNotice` | "Limited mobile experience" notice for desktop-only tools. Place straight after `PrimaryNavBar`. |
 | `common/AboutThisContent` | "About this content" disclosure (sources, technical notes) on overview and profile pages. |
 
+### Checkboxes, radio buttons and toggles
+
+**Outlined when off, solid when on.** This applies to all three controls.
+
+- **Off:** white fill with a `--neutral-400` border.
+- **On:** solid `--primary-600` fill and border, with a white tick, dot or thumb.
+- **Hover:** darken one step (`--neutral-500` border when off, `--primary-700` fill when on).
+
+`common/Checkbox` is the reference. Match it for radio buttons and toggles, and don't use the browser's default controls.
+
 ### Buttons
 
 Not a shared component yet. Copy the class pattern and match Storybook [Button](https://storybook.withpathways.org/?path=/story/components-buttons-button--default).
