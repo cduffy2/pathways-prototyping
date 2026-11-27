@@ -395,3 +395,9 @@
 .segment-size__cards .segment-card {
   min-width: 220px;
 }
+
+/* Phones: segment cards fill the width, as on production */
+@media (max-width: 599.98px) {
+  .segment-card { width: 100%; }
+  .segment-size__cards .segment-card { min-width: 0; }
+}

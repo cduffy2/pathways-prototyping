@@ -53,25 +53,25 @@ Hash routes are defined in `src/App.tsx`. Responsiveness is described in [layout
 | Route (`#…`) | Page | Template | Small screens |
 |---|---|---|---|
 | `welcome` | Home: value proposition, tools, case studies, news | Site | Responsive |
-| `segmentations` | All geographies (the default route) | Site | Not yet |
-| `kenya-overview` | Geography overview: segments, sizes, urban/rural | Tool | Not yet |
+| `segmentations` | All geographies | Site | Responsive |
+| `kenya-overview` | Geography overview: segments, sizes, urban/rural | Tool | Responsive |
 | `data-browser` | Explore one data point across all segments | Tool | Responsive |
 | `compare-segments` | Compare several data points across segments | Tool | Desktop-only + notice |
 | `prevalence-map` | Where each segment is most prevalent | Tool | Desktop-only + notice |
 | `kenya-typing-tools` | Typing tools for this geography | Tool | Responsive |
-| `rural-4` | Segment profile | Tool | Desktop-only |
-| `walk-in-her-shoes` (`rural-4/walk-in-her-shoes`) | Persona narrative for a segment | Tool | Desktop-only |
-| `domain-detail` | One vulnerability domain and its factors | Tool | Desktop-only |
-| `assistant` | AI assistant over Pathways data | Full-screen app | Desktop-only |
+| `rural-4` | Segment profile | Tool | Responsive |
+| `walk-in-her-shoes` (`rural-4/walk-in-her-shoes`) | Persona narrative for a segment | Tool | Desktop-only + notice |
+| `domain-detail` | One vulnerability domain and its factors | Tool | Desktop-only + notice |
+| `assistant` | AI assistant over Pathways data | Full-screen app | Desktop-only + notice |
 | `resources` | Resources hub (explainers, documentation) | Site | Responsive |
-| `resources-filtered` | Resources filtered by tag | Site | Not yet |
-| `guide-article` | Guide with section nav | Site | Not yet |
-| `methodology-explainer` (`understanding-pathways-data`) | Interactive explainer | Site | Not yet |
-| `how-pathways-data` | How Pathways data is organised | Site | Not yet |
+| `resources-filtered` | Resources filtered by tag | Site | Responsive |
+| `guide-article` | Guide with section nav | Site | Responsive |
+| `methodology-explainer` (`understanding-pathways-data`) | Interactive explainer | Site | Responsive |
+| `how-pathways-data` | How Pathways data is organised | Site | Responsive |
 | `typing-tools` | Typing tools explainer | Site | Responsive |
 | `news` | Blog: highlights, latest updates, filters, pagination | Site | Responsive |
 | `news-detail` | Blog post | Site | Responsive |
-| `article-detail` | Older article template | Site | Not yet |
+| `article-detail` | Older article template | Site | Responsive |
 | `contact` | Contact form | Site | Responsive |
 | `components` | Shared UI kit gallery, for prototypers (not linked from the nav) | Utility | Responsive |
 | `charts` | Chart kit gallery, for prototypers (not linked from the nav) | Utility | Responsive |

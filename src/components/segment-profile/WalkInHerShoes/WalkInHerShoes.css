@@ -111,3 +111,15 @@
   height: auto;
   pointer-events: none;
 }
+
+/* ── Responsive ── */
+@media (max-width: 899.98px) {
+  .walk-in-her-shoes__card { width: 100%; }
+}
+
+@media (max-width: 599.98px) {
+  .walk-in-her-shoes__card { height: auto; min-height: 260px; padding: 20px; }
+  .walk-in-her-shoes__card-content { gap: 24px; justify-content: flex-start; }
+  .walk-in-her-shoes__story-title { font-size: 20px; max-width: none; }
+  .walk-in-her-shoes__footsteps { width: 70%; }
+}

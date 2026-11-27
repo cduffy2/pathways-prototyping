@@ -52,3 +52,15 @@
 .not-found-page__link:hover {
   text-decoration: underline;
 }
+
+/* ── Responsive: no sidebar below 900px ── */
+.not-found-page__content { min-width: 0; }
+
+@media (max-width: 899.98px) {
+  .not-found-page .sidebar { display: none; }
+  .not-found-page__content { padding: 48px 24px; }
+}
+
+@media (max-width: 599.98px) {
+  .not-found-page__content { padding: 40px 16px; }
+}

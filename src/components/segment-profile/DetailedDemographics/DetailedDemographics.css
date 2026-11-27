@@ -121,3 +121,8 @@
   display: flex;
   align-items: center;
 }
+
+/* Phone: one category per row */
+@media (max-width: 599.98px) {
+  .detailed-demographics__row { flex-direction: column; gap: 24px; }
+}

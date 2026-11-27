@@ -70,10 +70,10 @@ Below 900px, `MobileNotice` (`src/components/common/MobileNotice/`) shows "Limit
 
 | Page | Status |
 |---|---|
-| Comparison tool, Prevalence map | Desktop-only + `MobileNotice` |
-| Segment profile, Walk in her shoes, Assistant, Domain detail | Desktop-only, no notice yet |
-| Data browser, Welcome, Blog, Blog post, Resources, Contact, Typing tools | Responsive |
-| Kenya overview, Segmentations, explainers, guides | Not yet responsive (overflow on phones) |
+| Comparison tool, Prevalence map, Walk in her shoes, Domain detail, Assistant | Desktop-only + `MobileNotice` |
+| Every other page, including the segment profile, Kenya overview and data browser | Responsive at 390, 768 and 1280px |
+
+Responsive tool pages hide `LeftSidebar` below 900px (`.my-page .sidebar { display: none; }`). The segment profile also drops its "On this page" column below 1024px, following the Figma tablet and phone designs.
 
 ## Recurring patterns
 

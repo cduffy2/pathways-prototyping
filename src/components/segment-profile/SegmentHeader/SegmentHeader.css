@@ -191,3 +191,25 @@
   color: var(--text-tertiary);
   flex-shrink: 0;
 }
+
+/* ── Responsive, following the Figma tablet and phone designs ── */
+@media (max-width: 899.98px) {
+  .segment-header { padding: 48px 0 32px; }
+  .segment-header__inner { padding: 0 32px; }
+  .segment-header__demographics { flex-wrap: wrap; gap: 16px 40px; max-width: none; }
+}
+
+/* Phone: avatar above the title, demographics in a 2 × 2 grid */
+@media (max-width: 599.98px) {
+  .segment-header { padding: 32px 0 24px; }
+  .segment-header__inner { padding: 0 16px; gap: 24px; }
+  .segment-header__content { flex-direction: column; align-items: flex-start; }
+  .segment-header__avatar { width: 72px; height: 72px; }
+  .segment-header__title-row { flex-wrap: wrap; }
+  .segment-header__type,
+  .segment-header__vulnerability { font-size: 28px; }
+  .segment-header__badge { width: 32px; height: 32px; }
+  .segment-header__population-row { flex-wrap: wrap; }
+  .segment-header__link { display: none; }
+  .segment-header__demographics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; }
+}

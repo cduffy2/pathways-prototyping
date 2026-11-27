@@ -1797,3 +1797,51 @@
 }
 
 /* ── Step 4 visual ── */
+
+/* ── Responsive (also used by How Pathways data is organised) ─────────────── */
+@media (max-width: 1007px) {
+  .mep__hero { grid-template-columns: minmax(0, 1fr); gap: 40px; padding: 48px 32px 24px; }
+  .mep__hero-visual { width: 100%; max-width: 400px; margin: 0 auto; }
+  .mep__section,
+  .mep__s2-header,
+  .mep__summary { padding: 64px 32px; }
+  .mep__cta-inner { flex-direction: column !important; align-items: flex-start; gap: 32px; padding: 48px 32px; }
+  .mep__two-col,
+  .mep__ho-grid { grid-template-columns: minmax(0, 1fr); }
+  .mep__domains-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mep__step-text-block { width: auto; max-width: 576px; }
+  .mep__summary-inner { flex-direction: column; }
+}
+
+@media (max-width: 640px) {
+  .mep__hero { padding: 32px 20px 16px; }
+  .mep__hero-title { font-size: 28px; }
+  .mep__hero-subtitle { font-size: 17px; }
+  .mep__section,
+  .mep__s2-header,
+  .mep__summary { padding: 48px 20px; }
+  .mep__cta-inner { padding: 40px 20px; }
+  .mep__domains-grid { grid-template-columns: minmax(0, 1fr); }
+  .mep__data-type-title { font-size: 24px; }
+  .mep__data-type-body { font-size: 17px; }
+}
+
+/* Scrollytelling on small screens: the animation stays pinned at the top while the steps scroll under it */
+@media (max-width: 899.98px) {
+  .mep__scrolly { flex-direction: column; }
+  .mep__scrolly-visual {
+    order: -1;
+    width: 100%;
+    height: 50vh;
+    top: var(--nav-height);
+    z-index: 2;
+    background: var(--background-page);
+  }
+  .mep__scrolly-text { width: 100%; align-items: stretch; }
+}
+
+/* Long hero titles wrap below wide desktop, so they never push the page sideways */
+.mep__hero-content { min-width: 0; }
+@media (max-width: 1279.98px) {
+  .mep__hero-title { white-space: normal; }
+}

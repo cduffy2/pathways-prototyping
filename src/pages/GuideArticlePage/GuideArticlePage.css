@@ -328,3 +328,46 @@
 .guide-article-page__anchor-link:hover {
   color: #1f1e1c;
 }
+
+/* Back link: phones and tablets only */
+.guide-article-page__back { display: none; }
+
+/* ── Responsive, following production's guide pages ── */
+@media (max-width: 1199.98px) {
+  .guide-article-page__anchors { width: 200px; }
+}
+
+@media (max-width: 899.98px) {
+  .guide-article-page__leftnav,
+  .guide-article-page__anchors { display: none; }
+  .guide-article-page__main { flex-direction: column; align-items: center; gap: 24px; padding: 32px 24px; }
+  .guide-article-page__content { flex-shrink: 1; min-width: 0; padding-bottom: 64px; }
+  .guide-article-page__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    align-self: flex-start;
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 0;
+    border: 0;
+    background: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-link);
+    cursor: pointer;
+  }
+  .guide-article-page__back svg { width: 18px; height: 18px; }
+  .guide-article-page__back:focus-visible { outline: 2px solid var(--focus-visible); outline-offset: 2px; }
+}
+
+@media (max-width: 599.98px) {
+  .guide-article-page__main { padding: 24px 16px; }
+  .guide-article-page__title { font-size: 28px; }
+  .guide-article-page__lead,
+  .guide-article-page__section-body { font-size: 17px; }
+  .guide-article-page__section-heading { font-size: 22px; }
+  .guide-article-page__prevnext { flex-direction: column; gap: 12px; }
+}

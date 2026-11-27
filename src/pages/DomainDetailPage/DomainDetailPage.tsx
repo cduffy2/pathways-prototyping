@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { PrimaryNavBar } from '../../components/layout/PrimaryNavBar/PrimaryNavBar';
+import { MobileNotice } from '../../components/common/MobileNotice/MobileNotice';
 import { LeftSidebar, type Page } from '../../components/layout/LeftSidebar/LeftSidebar';
 import { DOMAIN_DATA, type Category } from './domainData';
 import { Footer } from '../../components/layout/Footer/Footer';
@@ -168,6 +169,7 @@ export function DomainDetailPage({ currentPage, onNavigate, domainId, initialCat
     return (
       <div className="domain-detail-page">
         <PrimaryNavBar currentPage={currentPage} onNavigate={onNavigate} />
+        <MobileNotice />
         <div className="domain-detail-page__main">
           {!noSidebar && <LeftSidebar currentPage={currentPage} onNavigate={onNavigate} />}
           <div style={{ padding: 32 }}>Domain not found.</div>
@@ -186,6 +188,7 @@ export function DomainDetailPage({ currentPage, onNavigate, domainId, initialCat
   return (
     <div className="domain-detail-page" ref={pageRef}>
       <PrimaryNavBar currentPage={currentPage} onNavigate={onNavigate} />
+      <MobileNotice />
       <div className="domain-detail-page__main">
         {!noSidebar && <LeftSidebar currentPage={currentPage} onNavigate={onNavigate} />}
         <div className="domain-detail-page__content">

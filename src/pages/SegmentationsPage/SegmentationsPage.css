@@ -319,3 +319,43 @@
   color: var(--text-tertiary);
   margin: 0;
 }
+
+/* Tablet and phone, as on production: one column, cards in a grid, resources below */
+@media (max-width: 1199.98px) {
+  .segmentations-page__two-col { flex-direction: column; gap: 48px; }
+  .segmentations-page__geographies { width: 100%; }
+  .segmentations-page__cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .segmentations-page__card { width: auto; }
+  .segmentations-page__resources { position: static; }
+  .segmentations-page__resources .segmentations-page__section-header { padding: 0; }
+  .segmentations-page__resources-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border: 1px solid var(--neutral-outlined-border);
+    background-color: var(--common-white);
+  }
+  .segmentations-page__resource { border-bottom: 0; border-right: 1px solid var(--neutral-outlined-border); }
+  .segmentations-page__resource:last-child { border-right: 0; }
+}
+
+@media (max-width: 899.98px) {
+  .segmentations-page__header { padding: 40px 24px; gap: 24px; }
+  .segmentations-page__header-left { flex: 0 1 55%; min-width: 0; }
+  .segmentations-page__header-right { flex: 1 1 45%; }
+  .segmentations-page__cta { flex-wrap: wrap; }
+  .segmentations-page__content { padding: 48px 24px; }
+}
+
+@media (max-width: 599.98px) {
+  .segmentations-page__header { flex-direction: column; align-items: stretch; padding: 32px 16px 16px; }
+  .segmentations-page__title { font-size: 28px; }
+  .segmentations-page__description { font-size: 16px; }
+  .segmentations-page__header-right { max-width: none; align-self: flex-end; width: 70%; }
+  .segmentations-page__content { padding: 40px 16px; }
+  .segmentations-page__cards { grid-template-columns: minmax(0, 1fr); }
+  .segmentations-page__card { height: 152px; }
+  .segmentations-page__card-name { font-size: 20px; }
+  .segmentations-page__resources-list { grid-template-columns: minmax(0, 1fr); }
+  .segmentations-page__resource { border-right: 0; border-bottom: 1px solid var(--neutral-outlined-border); }
+  .segmentations-page__resource:last-child { border-bottom: 0; }
+}

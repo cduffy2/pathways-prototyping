@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { PrimaryNavBar } from '../../components/layout/PrimaryNavBar/PrimaryNavBar';
+import { MobileNotice } from '../../components/common/MobileNotice/MobileNotice';
 import { LeftSidebar, type Page } from '../../components/layout/LeftSidebar/LeftSidebar';
 import { Footer } from '../../components/layout/Footer/Footer';
 import { AnchorNav } from '../../components/ui/AnchorNav/AnchorNav';
@@ -32,6 +33,7 @@ export function WalkInHerShoesPage({ currentPage, onNavigate }: WalkInHerShoesPa
   return (
     <div className="wihs-page">
       <PrimaryNavBar currentPage={currentPage} onNavigate={onNavigate} />
+      <MobileNotice />
       <div className="wihs-page__main">
         <LeftSidebar currentPage={currentPage} onNavigate={onNavigate} />
         <div className="wihs-page__content">

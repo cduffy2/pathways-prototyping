@@ -252,3 +252,8 @@
   color: var(--common-white);
   line-height: 1.42;
 }
+
+/* Phone: outcomes, then vulnerability factors */
+@media (max-width: 599.98px) {
+  .key-data-points__columns { flex-direction: column; }
+}

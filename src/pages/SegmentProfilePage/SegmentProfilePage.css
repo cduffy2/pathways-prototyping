@@ -237,3 +237,36 @@
   width: 100%;
   background-color: var(--background-level1);
 }
+
+/* ── Responsive, following the Figma tablet and phone designs ── */
+.segment-profile-page__content { min-width: 0; }
+.segment-profile-page__main-content { min-width: 0; }
+
+@media (max-width: 1279.98px) {
+  .segment-profile-page__body { gap: 40px; }
+  .segment-profile-page__anchor-nav { width: 220px; }
+  .segment-profile-page__illustration { display: none; }
+}
+
+/* Tablet: no "On this page" column; the content takes the full width */
+@media (max-width: 1023.98px) {
+  .segment-profile-page__anchor-nav { display: none; }
+  .segment-profile-page__main-content { max-width: none; }
+}
+
+@media (max-width: 899.98px) {
+  .segment-profile-page .sidebar { display: none; }
+  .segment-profile-page__content-inner { padding: 0 32px; }
+  .segment-profile-page__all-data-section { padding: 48px 0; }
+}
+
+@media (max-width: 599.98px) {
+  .segment-profile-page__content-inner { padding: 0 16px; }
+  .segment-profile-page__body { padding-top: 32px; }
+  .segment-profile-page__main-content { gap: 40px; }
+  .segment-profile-page__section-title { font-size: 24px; }
+  .segment-profile-page__section-title-row { flex-wrap: wrap; align-items: center; gap: 8px; }
+  .segment-profile-page__section-text,
+  .segment-profile-page__section-subtitle { font-size: 17px; }
+  .segment-profile-page__analysis-subtitle { font-size: 18px; }
+}

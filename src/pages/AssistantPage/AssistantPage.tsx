@@ -6,6 +6,7 @@ import { ChatSidebar } from './ChatSidebar';
 import { ChatArea } from './ChatArea';
 import { ChatInput } from './ChatInput';
 import { SourceDrawer } from './SourceDrawer';
+import { MobileNotice } from '../../components/common/MobileNotice/MobileNotice';
 
 interface AssistantPageInnerProps {
   initialQuery?: string;
@@ -54,6 +55,7 @@ interface AssistantPageProps {
 export function AssistantPage({ initialQuery }: AssistantPageProps) {
   return (
     <ConversationProvider>
+      <MobileNotice />
       <AssistantPageInner initialQuery={initialQuery} />
     </ConversationProvider>
   );

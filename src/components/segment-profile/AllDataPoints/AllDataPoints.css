@@ -654,3 +654,17 @@
   font-family: 'Inter', sans-serif;
   color: var(--text-tertiary);
 }
+
+/* ── Responsive, following the Figma tablet and phone designs ── */
+@media (max-width: 899.98px) {
+  .all-data-points__filter-row { flex-wrap: wrap; row-gap: 8px; }
+  .all-data-points__search { min-width: 0; flex: 1 1 240px; }
+}
+
+@media (max-width: 599.98px) {
+  .all-data-points__header { position: static; }
+  .all-data-points__title-row { flex-wrap: wrap; row-gap: 8px; }
+  .all-data-points__actions { flex-wrap: wrap; margin-left: 0; width: 100%; }
+  .all-data-points__search { margin-left: 0; flex-basis: 100%; }
+  .all-data-points__grid { grid-template-columns: minmax(0, 1fr); }
+}

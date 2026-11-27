@@ -31,7 +31,7 @@ type Page = 'kenya-overview' | 'data-browser' | 'rural-4' | 'walk-in-her-shoes' 
 const NO_SPINNER_PAGES: Page[] = ['loading', 'components', 'charts'];
 
 // Data tool pages are desktop-only; they keep a 1200px minimum width
-const DESKTOP_ONLY_PAGES: Page[] = ['rural-4', 'walk-in-her-shoes', 'compare-segments', 'assistant', 'prevalence-map', 'domain-detail'];
+const DESKTOP_ONLY_PAGES: Page[] = ['walk-in-her-shoes', 'compare-segments', 'assistant', 'prevalence-map', 'domain-detail'];
 
 function FullPageSpinner() {
   return (
@@ -56,6 +56,7 @@ function App() {
 
   const [currentPage, setCurrentPage] = useState<Page>(() => {
     const hash = window.location.hash.slice(1);
+    if (hash === 'kenya-overview') return 'kenya-overview';
     if (hash === 'data-browser') return 'data-browser';
     if (hash === 'rural-4') return 'rural-4';
     if (hash === 'walk-in-her-shoes' || hash === 'rural-4/walk-in-her-shoes') return 'walk-in-her-shoes';

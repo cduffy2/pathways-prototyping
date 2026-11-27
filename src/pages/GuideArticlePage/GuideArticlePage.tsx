@@ -5,6 +5,8 @@ import type { Page } from '../../components/layout/LeftSidebar/LeftSidebar';
 import articleImg from '../../assets/WIHS-photo.png';
 import ChevronDownIcon from '../../assets/icons/ChevronDown.svg?react';
 import ChevronRightIcon from '../../assets/icons/ChevronRight.svg?react';
+import ArrowBackIcon from '../../assets/icons/ArrowBackFilled.svg?react';
+import { AnchorNav } from '../../components/ui/AnchorNav/AnchorNav';
 import './GuideArticlePage.css';
 
 interface GuideArticlePageProps {
@@ -116,7 +118,6 @@ export function GuideArticlePage({ currentPage, onNavigate, navSection = 'unders
     const section = NAV_SECTIONS.find(s => s.id === navSection);
     return section?.children[0]?.id ?? 'what-is';
   });
-  const [activeAnchor, setActiveAnchor] = useState<string>('article-top');
   const contentRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
@@ -131,28 +132,6 @@ export function GuideArticlePage({ currentPage, onNavigate, navSection = 'unders
   useEffect(() => {
     document.title = 'Pathways | What is Pathways';
   }, []);
-
-  useEffect(() => {
-    if (!hasContent) return;
-    const anchorIds = ['article-top', ...ARTICLE_SECTIONS.map(s => s.id)];
-    const handleScroll = () => {
-      const mid = window.innerHeight * 0.35;
-      let active = anchorIds[0];
-      for (const id of anchorIds) {
-        const el = sectionRefs.current[id];
-        if (el && el.getBoundingClientRect().top <= mid) active = id;
-      }
-      setActiveAnchor(active);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [hasContent]);
-
-  const scrollToAnchor = (id: string) => {
-    const el = sectionRefs.current[id];
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
 
   const toggleSection = (id: string) => {
     setOpenSections(prev => {
@@ -204,6 +183,10 @@ export function GuideArticlePage({ currentPage, onNavigate, navSection = 'unders
 
         {/* Main content */}
         <div className="guide-article-page__main" ref={contentRef}>
+          {/* Below 900px the guide nav is hidden, as on production; this leads back to Resources */}
+          <button type="button" className="guide-article-page__back" onClick={() => onNavigate('resources')}>
+            <ArrowBackIcon aria-hidden="true" />Resources
+          </button>
           {hasContent ? (
             <>
               <div className="guide-article-page__content">
@@ -260,16 +243,7 @@ export function GuideArticlePage({ currentPage, onNavigate, navSection = 'unders
               </div>
 
               <aside className="guide-article-page__anchors">
-                <p className="guide-article-page__anchors-label">On this page</p>
-                {ANCHOR_LINKS.map(link => (
-                  <button
-                    key={link.id}
-                    className={`guide-article-page__anchor-link${activeAnchor === link.id ? ' guide-article-page__anchor-link--active' : ''}`}
-                    onClick={() => scrollToAnchor(link.id)}
-                  >
-                    {link.label}
-                  </button>
-                ))}
+                <AnchorNav links={ANCHOR_LINKS} />
               </aside>
             </>
           ) : (

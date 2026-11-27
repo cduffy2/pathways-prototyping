@@ -366,3 +366,8 @@
   .ktt-resources { flex-direction: column; border-right: 1px solid var(--neutral-outlined-border); border-bottom: 0; }
   .ktt-resource { border-right: 0; border-bottom: 1px solid var(--neutral-outlined-border); }
 }
+
+/* Below 900px the sidebar is hidden, as on the data browser */
+@media (max-width: 899.98px) {
+  .ktt-page .sidebar { display: none; }
+}
