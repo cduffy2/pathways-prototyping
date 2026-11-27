@@ -307,39 +307,6 @@
   background-color: #DCDACD;
 }
 
-.primary-nav__mobile-row {
-  display: flex;
-  align-items: center;
-  transition: background-color var(--transition-fast);
-}
-
-.primary-nav__mobile-row:not(.primary-nav__mobile-item--active):hover {
-  background-color: #F3F3E6;
-}
-
-.primary-nav__mobile-row .primary-nav__mobile-item {
-  flex: 1;
-  background: none;
-}
-
-.primary-nav__mobile-drill {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 36px;
-  margin-right: 12px;
-  padding: 0 4px;
-  background: none;
-  border: none;
-  border-radius: 6px;
-  color: #000000;
-  cursor: pointer;
-}
-
-.primary-nav__mobile-drill:hover {
-  background-color: #E5E5DC;
-}
-
 .primary-nav__mobile-group + .primary-nav__mobile-group {
   border-top: 1px solid #E5E5DC;
 }

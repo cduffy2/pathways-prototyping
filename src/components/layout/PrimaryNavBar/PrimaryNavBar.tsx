@@ -242,15 +242,16 @@ export function PrimaryNavBar({ currentPage, onNavigate }: PrimaryNavBarProps) {
             </button>
             <ul className="primary-nav__mobile-items">
               <li><a href="#welcome" className={`primary-nav__mobile-item ${currentPage === 'welcome' ? 'primary-nav__mobile-item--active' : ''}`} onClick={nav('welcome')}>Welcome</a></li>
-              <li className={`primary-nav__mobile-row ${segActive ? 'primary-nav__mobile-item--active' : ''}`}>
-                <a href="#segmentations" className="primary-nav__mobile-item" onClick={nav('segmentations')}>Segmentations</a>
-                <button type="button" className="primary-nav__mobile-drill" aria-label="Show segmentations" onClick={() => setMobilePanel('seg')}>
+              {/* The whole row opens the next level; "All geographies" there leads to the cover page */}
+              <li>
+                <button type="button" className={`primary-nav__mobile-item ${segActive ? 'primary-nav__mobile-item--active' : ''}`} aria-haspopup="true" onClick={() => setMobilePanel('seg')}>
+                  Segmentations
                   <ChevronRightIcon className="primary-nav__mobile-chevron" aria-hidden="true" />
                 </button>
               </li>
-              <li className={`primary-nav__mobile-row ${resActive ? 'primary-nav__mobile-item--active' : ''}`}>
-                <a href="#resources" className="primary-nav__mobile-item" onClick={nav('resources')}>Resources</a>
-                <button type="button" className="primary-nav__mobile-drill" aria-label="Show resources" onClick={() => setMobilePanel('res')}>
+              <li>
+                <button type="button" className={`primary-nav__mobile-item ${resActive ? 'primary-nav__mobile-item--active' : ''}`} aria-haspopup="true" onClick={() => setMobilePanel('res')}>
+                  Resources
                   <ChevronRightIcon className="primary-nav__mobile-chevron" aria-hidden="true" />
                 </button>
               </li>
