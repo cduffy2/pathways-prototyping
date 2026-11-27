@@ -236,12 +236,12 @@
 
 .primary-nav__mobile-track {
   display: flex;
-  width: 300%;
+  width: 400%; /* one panel per entry in MOBILE_PANELS */
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .primary-nav__mobile-panel {
-  width: calc(100% / 3);
+  width: calc(100% / 4);
   flex-shrink: 0;
 }
 
@@ -439,3 +439,8 @@
   .primary-nav__hamburger { display: flex; }
   .gs-trigger { display: none; }
 }
+
+/* Level 3: pages inside a segmentation */
+.primary-nav__mobile-tool-icon { width: 20px; height: 20px; flex-shrink: 0; color: var(--text-secondary); }
+.primary-nav__mobile-group-title--segments { min-height: 0; margin-top: 12px; padding: 0 24px 4px; font-size: 12px; color: var(--text-tertiary); }
+.primary-nav__mobile-level { margin-left: -16px; height: 24px; padding: 0 8px; }

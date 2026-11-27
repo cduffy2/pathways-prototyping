@@ -11,6 +11,14 @@ import indonesiaFlag from '../../../assets/icons/indonesia.png';
 import kenyaFlag from '../../../assets/icons/kenya.png';
 import nigeriaFlag from '../../../assets/icons/nigeria.png';
 import senegalFlag from '../../../assets/icons/Senegal.png';
+import CompareIcon from '../../../assets/icons/Compare.svg?react';
+import DataIcon from '../../../assets/icons/Data.svg?react';
+import LocationIcon from '../../../assets/icons/Location.svg?react';
+import FolderIcon from '../../../assets/icons/Folder.svg?react';
+import LeafIcon from '../../../assets/icons/Leaf.svg?react';
+import CityIcon from '../../../assets/icons/City.svg?react';
+import { populationSegments } from '../../../data/segments';
+import { Chip } from '../../ui/Chip/Chip';
 import { GlobalSearch } from '../GlobalSearch/GlobalSearch';
 import './PrimaryNavBar.css';
 
@@ -31,7 +39,18 @@ const RESOURCE_GROUPS: { label: string; navSection: string; links: string[] }[] 
   { label: 'Using Pathways in your work', navSection: 'applying', links: ['Using the Pathways MCP Server'] },
 ];
 
-const MOBILE_PANELS = ['main', 'seg', 'res'] as const;
+const MOBILE_PANELS = ['main', 'seg', 'geo', 'res'] as const;
+
+// Level 3 of the mobile menu: the pages inside one segmentation (mirrors LeftSidebar)
+const GEO_TOOLS: { page: Page; label: string; Icon: typeof CompareIcon }[] = [
+  { page: 'compare-segments', label: 'Comparison tool', Icon: CompareIcon },
+  { page: 'data-browser', label: 'Data browser', Icon: DataIcon },
+  { page: 'prevalence-map', label: 'Prevalence map', Icon: LocationIcon },
+  { page: 'kenya-typing-tools', label: 'Typing tools & more', Icon: FolderIcon },
+];
+
+const LEVELS = ['least', 'less', 'more', 'most'] as const;
+const levelOf = (badge: string) => LEVELS[Math.min(Math.max(parseInt(badge, 10), 1), 4) - 1];
 
 interface PrimaryNavBarProps {
   currentPage?: Page;
@@ -44,6 +63,7 @@ export function PrimaryNavBar({ currentPage, onNavigate }: PrimaryNavBarProps) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [segOpen, setSegOpen] = useState(false);
   const [mobilePanel, setMobilePanel] = useState<typeof MOBILE_PANELS[number]>('main');
+  const [mobileGeo, setMobileGeo] = useState(GEOGRAPHIES.find(g => g.id === 'kenya') ?? GEOGRAPHIES[0]);
   const segRef = useRef<HTMLLIElement>(null);
   const lastScrollY = useRef(0);
   const accumulatedDelta = useRef(0);
@@ -252,13 +272,52 @@ export function PrimaryNavBar({ currentPage, onNavigate }: PrimaryNavBarProps) {
               </li>
               {GEOGRAPHIES.map(geo => (
                 <li key={geo.id}>
-                  <button type="button" className={`primary-nav__mobile-subitem ${selectedSeg === geo.id ? 'primary-nav__mobile-subitem--active' : ''}`} onClick={() => goSeg(geo.id)}>
+                  <button type="button" className={`primary-nav__mobile-subitem ${selectedSeg === geo.id ? 'primary-nav__mobile-subitem--active' : ''}`} onClick={() => { setMobileGeo(geo); setMobilePanel('geo'); }}>
                     <img src={geo.flag} alt="" className="primary-nav__seg-flag" />
                     {geo.name}
                     <ChevronRightIcon className="primary-nav__mobile-chevron" aria-hidden="true" />
                   </button>
                 </li>
               ))}
+            </ul>
+          </div>
+          <div className="primary-nav__mobile-panel" inert={mobilePanel !== 'geo'}>
+            <button type="button" className="primary-nav__mobile-back" onClick={() => setMobilePanel('seg')}>
+              <ChevronRightIcon className="primary-nav__mobile-back-icon" aria-hidden="true" />
+              Back
+            </button>
+            {/* Every geography opens the Kenya demo pages, as elsewhere in the prototype */}
+            <ul className="primary-nav__mobile-sub">
+              <li>
+                <a href="#kenya-overview" className={`primary-nav__mobile-subitem ${currentPage === 'kenya-overview' && mobileGeo.id === 'kenya' ? 'primary-nav__mobile-subitem--active' : ''}`} onClick={nav('kenya-overview')}>
+                  <img src={mobileGeo.flag} alt="" className="primary-nav__seg-flag" />
+                  {mobileGeo.name} overview
+                </a>
+              </li>
+              {GEO_TOOLS.map(({ page, label, Icon }) => (
+                <li key={page}>
+                  <a href={`#${page}`} className={`primary-nav__mobile-subitem ${currentPage === page ? 'primary-nav__mobile-subitem--active' : ''}`} onClick={nav(page)}>
+                    <Icon className="primary-nav__mobile-tool-icon" aria-hidden="true" />
+                    {label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <h4 className="primary-nav__mobile-group-title primary-nav__mobile-group-title--segments">Segment profiles</h4>
+            <ul className="primary-nav__mobile-sub">
+              {populationSegments.map(seg => {
+                const SegIcon = seg.type === 'rural' ? LeafIcon : CityIcon;
+                const target: Page = seg.id === 'rural-4' ? 'rural-4' : 'not-found';
+                return (
+                  <li key={seg.id}>
+                    <a href={`#${target}`} className={`primary-nav__mobile-subitem ${seg.id === 'rural-4' && currentPage === 'rural-4' ? 'primary-nav__mobile-subitem--active' : ''}`} onClick={nav(target)}>
+                      <SegIcon className="primary-nav__mobile-tool-icon" aria-hidden="true" />
+                      {seg.label}
+                      <Chip variant="level" level={levelOf(seg.badge)} className="primary-nav__mobile-level">{seg.badge}</Chip>
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <div className="primary-nav__mobile-panel" inert={mobilePanel !== 'res'}>
